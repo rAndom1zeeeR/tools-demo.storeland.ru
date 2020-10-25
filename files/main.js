@@ -1208,15 +1208,15 @@ function Compare() {
   });
   function carouselInitialized(event){
     if (event.item.count > event.page.size) {
-      $('.navigation').css('display', 'flex');
+      $('.nav').css('display', 'flex');
     }else{
-      $('.navigation').css('display', 'none');
+      $('.nav').css('display', 'none');
     }
   }
-  $('.pageCompare .navigation .prev, .toLeft').click(function(event) {
+  $('.pageCompare .nav-prev, .toLeft').click(function(event) {
     $('.CompareGoodsTableTbody .owl-carousel').trigger('prev.owl.carousel');
   });
-  $('.pageCompare .navigation .next, .toRight').click(function(event) {
+  $('.pageCompare .nav-next, .toRight').click(function(event) {
     $('.CompareGoodsTableTbody .owl-carousel').trigger('next.owl.carousel');
   });
   // Сравнение товаров. Фильтр в верхней навигации. Отображение всех и различающихся характеристик товара
@@ -2803,13 +2803,13 @@ function pdtBrands() {
 function pdtSlider() {
   // Функция слайдер для "Акции" на главной странице
   $('#pdt__sales .owl-carousel').owlCarousel({
-    items: 5,
-    margin: 32,
+    items: 1,
+    margin: 0,
     loop: false,
     rewind: true,
     lazyLoad: true,
     nav: true,
-    navContainer: '#pdt__sales .owl-nav',
+    navContainer: '',
     navText: [ , ],
     dots: false,
     autoHeight: false,
@@ -2825,12 +2825,12 @@ function pdtSlider() {
     responsive: {
       0:{items:1},
       320:{items:1},
-      481:{items:2},
-      641:{items:3},
-      768:{items:3},
-      992:{items:3},
-      1200:{items:4},
-      1440:{items:5}
+      481:{items:1},
+      641:{items:1},
+      768:{items:1},
+      992:{items:1},
+      1200:{items:1},
+      1440:{items:1}
     }
   });
   // Функция слайдера для "Товары на главной" на главной странице
