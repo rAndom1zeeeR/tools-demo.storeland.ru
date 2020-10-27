@@ -2829,14 +2829,14 @@ function pdtSlider() {
     }
   });
   // Функция слайдера для "Товары на главной" на главной странице
-  $('#pdt__sale .owl-carousel').owlCarousel({
+  $('#pdt__cat .owl-carousel').owlCarousel({
     items: 2,
     margin: 32,
     loop: false,
     rewind: true,
     lazyLoad: true,
     nav: true,
-    navContainer: '#pdt__sale .owl-nav',
+    navContainer: '#pdt__cat .owl-nav',
     navText: [ , ],
     dots: false,
     autoHeight: false,
@@ -2860,6 +2860,28 @@ function pdtSlider() {
       1440:{items:2},
       1680:{items:2}
     }
+  });
+  // Функция слайдера для "Товары на главной" на главной странице
+  $('#pdt__best .owl-carousel').owlCarousel({
+    items: 1,
+    margin: 0,
+    loop: false,
+    rewind: true,
+    lazyLoad: true,
+    nav: true,
+    navContainer: '#pdt__best .owl-nav',
+    navText: [ , ],
+    dots: false,
+    autoHeight: false,
+    autoHeightClass: 'owl-height',
+    autoplay: false,
+    autoplayHoverPause: true,
+    smartSpeed: 500,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    responsiveClass: true,
+    responsiveRefreshRate: 100
   });
   // Функция слайдера для Новинок на главной странице
   $('#pdt__new .owl-carousel').owlCarousel({
@@ -2896,7 +2918,7 @@ function pdtSlider() {
     onChanged: carouselInitialized
   });
   // Функция слайдера для Хитов продаж на главной странице
-  $('#pdt__best .owl-carousel').owlCarousel({
+  $('#pdt__sale .owl-carousel').owlCarousel({
     items: 5,
     margin: 16,
     loop: false,
