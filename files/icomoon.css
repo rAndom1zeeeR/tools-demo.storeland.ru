@@ -131,7 +131,7 @@
 .icon-notify:before {
   content: "\e91a";
 }
-.icon-payment-method:before {
+.icon-payment:before {
   content: "\e91b";
 }
 .icon-phone .path1:before {

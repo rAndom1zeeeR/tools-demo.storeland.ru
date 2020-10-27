@@ -873,12 +873,6 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 
 
 
-
-
-
-
-
-
 /*** Категории ***/
 .catalog__item {display: flex;flex-wrap: wrap;}
 .catalog__item .catalog__image {display: none;width: 210px;height: 300px;}
@@ -912,14 +906,21 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 #news .news__content {padding-left: 1.5rem;}
 
 
+/*** Левая часть. Сайдбар. ***/
+.sidebar__block {margin-bottom: 2rem;}
+.sidebar__block:last-child {margin-bottom: 0;}
 
+/*** Промо ***/
+.promo__image {height: 570px;background-repeat: no-repeat;background-size: cover;}
+.promo__title {font-size: 30px;font-weight: bold;padding: 2rem;}
+.promo__button {margin: 0 2rem;}
 
-
-
-
-
-
-
+/*** Наш сервис ***/
+.sidebar__title {margin-bottom: 1.5rem;font-size: 1.5rem;font-weight: 500;background-color: #f4f4f4;border-radius: 5px;padding: 1rem;display: block;}
+.service__item {margin-bottom: 2rem;display: flex;align-items: flex-start;flex-wrap: wrap;}
+.service__icon {font-size: 60px;width: 80px;color: #fda800;}
+.service__content {width: calc(100% - 80px);}
+.service__title {font-size: 18px;font-weight: 500;margin-bottom: 0.25rem;}
 
 
 
