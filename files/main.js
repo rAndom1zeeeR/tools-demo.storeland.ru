@@ -3087,8 +3087,8 @@ function newsCarousel() {
       onChanged: carouselInitialized
     });
     $("#news .news_list_shop.owl-carousel").owlCarousel({
-      items: 4,
-      margin: 20,
+      items: 3,
+      margin: 32,
       loop: false,
       rewind: true,
       lazyLoad: true,
@@ -3113,7 +3113,7 @@ function newsCarousel() {
         641:{items:3},
         768:{items:3},
         992:{items:4},
-        1200:{items:4}
+        1200:{items:3}
       },
       onInitialize: carouselInitialized,
       onInitialized: carouselInitialized,
@@ -3305,6 +3305,35 @@ function priceDiff() {
   });
 }
 
+// Переименование названий Месяца
+function monthNames() {
+  $('#news .month').each(function (){
+    if ($(this).text() === 'Jan') {
+      $(this).text('Января')
+    }else if ($(this).text() === 'Feb') {
+      $(this).text('Февраля')
+    }else if ($(this).text() === 'Mar') {
+      $(this).text('Марта')
+    }else if ($(this).text() === 'Apr') {
+      $(this).text('Апреля')
+    }else if ($(this).text() === 'May') {
+      $(this).text('Мая')
+    }else if ($(this).text() === 'Jun') {
+      $(this).text('Июня')
+    }else if ($(this).text() === 'Jul') {
+      $(this).text('Июля')
+    }else if ($(this).text() === 'Aug') {
+      $(this).text('Августа')
+    }else if ($(this).text() === 'Sep') {
+      $(this).text('Сентября')
+    }else if ($(this).text() === 'Nov') {
+      $(this).text('Ноября')
+    }else if ($(this).text() === 'Dec') {
+      $(this).text('Декабря')
+    }
+  });
+}
+
 // Загрузка основных функций шаблона
 $(document).ready(function(){
   OpenMenu();
@@ -3315,6 +3344,7 @@ $(document).ready(function(){
   goodsModRest();
   quantity();
   priceDiff();
+  monthNames();
   // Ленивая загрузка
   $(function(){
     const observer = lozad(); // lazy loads elements with default selector as '.lozad'

@@ -832,13 +832,12 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 #pdt__sale .product__item {margin-bottom: 1rem;padding: 1rem 1rem 1rem 0;border-radius: 5px;border-width: 1px;border-style: dashed;border-color: transparent transparent #dddddd transparent;}
 #pdt__sale .product__item:hover {border-color: #fda800;}
 #pdt__sale .product__item form {display: flex;}
-#pdt__sale .product__image {width: 70px;height: 100px;border: 0;align-items: flex-start;}
-#pdt__sale .product__name {margin: 0;padding: 0 1rem;width: calc(60% - 70px);}
-#pdt__sale .product__price {margin: 0;padding: 0 1rem;width: calc(40% - 30px);}
+#pdt__sale .product__image {width: 80px;height: 100px;border: 0;align-items: flex-start;}
+#pdt__sale .product__image img {max-width: 80px;max-height: 120px;}
+#pdt__sale .product__name {margin: 0;padding: 0 1rem;width: calc(60% - 80px);max-height: 7.5rem;}
+#pdt__sale .product__price {margin: 0;padding: 0 1rem;width: calc(40% - 40px);}
 #pdt__sale .product__links {width: auto;margin: 0;position: relative;justify-content: flex-start;flex-direction: column;}
-#pdt__sale .product__links a {width: auto;height: auto;line-height: 1;}
-#pdt__sale .product__links a + a {margin-top: 1rem;}
-#pdt__sale .product__links a:hover {background-color: transparent;color: #fda800;}
+#pdt__sale .product__links a {width: 40px;height: 40px;line-height: 45px;}
 #pdt__sale .price__old {display: block;margin: 0.25rem 0 0 0;}
 #pdt__sale .product__available {margin-top: 0.5rem;}
 
@@ -847,6 +846,7 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 #pdt [id^="pdt__"] {display: none;position: relative;}
 #pdt [id^="pdt__"].active {display: block;}
 .products__grid.owl-carousel .product__item {display: block;width: auto;}
+.products__grid.owl-carousel .owl-item {padding: 1px;}
 
 /*** Товары таблицей ***/
 .products__grid {position: relative;}
@@ -861,7 +861,7 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 .available__false {display: none;color: #afafaf;}
 .empty .available__true {display: none;}
 .empty .available__false {display: block;}
-.product__name {font-size: 18px;line-height: 1.5rem;max-height: 4.5rem;display: block;margin-top: 0.5rem;}
+.product__name {margin-top: 0.5rem;font-size: 18px;line-height: 1.5rem;max-height: 4.5rem;overflow: hidden;display: block;}
 .product__name:hover {color: #0086b7;}
 .price__now {font-size: 18px;font-weight: bold;}
 .price__old {margin-left: 1rem;color: #fda800;}
@@ -891,10 +891,16 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 /*** Новости ***/
 #news [class^="news_list_"] {display: none;}
 #news [class^="news_list_"].active {display: block;}
-
-
-
-
+#news .news__title {font-size: 18px;line-height: 1.5rem;max-height: 4.5rem;overflow: hidden;display: block;}
+#news .news__text {display: none;}
+#news .news__more {margin-top: 0.5rem;color: #fda800;font-size: 18px;display: block;}
+#news .news__more:hover {color: #000000;}
+#news .news__image {margin-bottom: 2.5rem;height: 280px;position: relative;display: flex;align-items: center;justify-content: center;}
+#news .news__image img {width: auto;}
+#news .news__date {position: absolute;bottom: -1.75rem;left: 1.5rem;}
+#news .news__date .day {padding: 0.5rem 1rem;background-color: #fda800;color: #FFFFFF;font-size: 1.5rem;border-radius: 5px;display: inline-block;}
+#news .news__date .month {margin-left: 0.5rem;font-size: 1rem;vertical-align: middle;}
+#news .news__content {padding-left: 1.5rem;}
 
 /******************************************************************************
 *******************************************************************************/

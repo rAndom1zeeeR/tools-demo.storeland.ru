@@ -1114,6 +1114,8 @@
 						</div>
 					</div>
 					{% ENDIF %}
+				</div>
+					
 					<!-- Новости -->
 					{% IF news_list_all_empty=0 || news_list_shop_empty=0 || news_list_articles_empty=0 || news_list_mass_media_empty=0 %}
 					<div id="news">
@@ -1144,7 +1146,7 @@
 								<div class="news__content">
 									<a class="news__title" href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;"><span>{news_list_all.TITLE}</span></a>
 									{% IF news_list_all.TEXT_SHORT %}<div class="news__text">{news_list_all.TEXT_SHORT}</div>{% ENDIF %}
-									<a href="{news_list_all.URL}" class="news__more more" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;"><i class="icon-arrow-right"></i><span>Читать статью</span></a>
+									<a href="{news_list_all.URL}" class="news__more" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;"><span>Читать далее</span></a>
 								</div>
 							</div>
 							{% ENDFOR %}
@@ -1158,13 +1160,16 @@
 								<a class="news__image" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;">
 									<img src="{% IF news_list_shop.IMG %}{news_list_shop.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}news1.png?design=glamour{% ENDIF %}" alt="{news_list_shop.TITLE}" />
 									{% IF news_list_shop.SHOW_TIME %}
-									<div class="news__date">{news_list_shop.TIME | date("d.m.y")}</div>
+									<div class="news__date">
+										<span class="day">{news_list_shop.TIME | date("d")}</span>
+										<span class="month">{news_list_shop.TIME | date("M")}</span>
+									</div>
 									{% ENDIF %}
 								</a>
 								<div class="news__content">
 									<a class="news__title" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;"><span>{news_list_shop.TITLE}</span></a>
 									{% IF news_list_shop.TEXT_SHORT %}<div class="news__text">{news_list_shop.TEXT_SHORT}</div>{% ENDIF %}
-									<a href="{news_list_shop.URL}" class="news__more more" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;"><i class="icon-arrow-right"></i><span>Читать статью</span></a>
+									<a href="{news_list_shop.URL}" class="news__more" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;"><span>Читать далее</span></a>
 								</div>
 							</div>
 							{% ENDFOR %}
@@ -1184,7 +1189,7 @@
 								<div class="news__content">
 									<a class="news__title" href="{news_list_articles.URL}" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;"><span>{news_list_articles.TITLE}</span></a>
 									{% IF news_list_articles.TEXT_SHORT %}<div class="news__text">{news_list_articles.TEXT_SHORT}</div>{% ENDIF %}
-									<a href="{news_list_articles.URL}" class="news__more more" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;"><i class="icon-arrow-right"></i><span>Читать статью</span></a>
+									<a href="{news_list_articles.URL}" class="news__more" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;"><span>Читать далее</span></a>
 								</div>
 							</div>
 							{% ENDFOR %}
@@ -1204,7 +1209,7 @@
 								<div class="news__content">
 									<a class="news__title" href="{news_list_mass_media.URL}" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;"><span>{news_list_mass_media.TITLE}</span></a>
 									{% IF news_list_mass_media.TEXT_SHORT %}<div class="news__text">{news_list_mass_media.TEXT_SHORT}</div>{% ENDIF %}
-									<a href="{news_list_mass_media.URL}" class="news__more more" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;"><i class="icon-arrow-right"></i><span>Читать статью</span></a>
+									<a href="{news_list_mass_media.URL}" class="news__more" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;"><span>Читать далее</span></a>
 								</div>
 							</div>
 							{% ENDFOR %}
@@ -1212,7 +1217,6 @@
 						{% ENDIF %}
 					</div>
 					{% ENDIF %}
-				</div>
 			</div>
 		</div>
 	</section>
