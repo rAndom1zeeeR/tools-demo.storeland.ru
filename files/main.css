@@ -10,8 +10,8 @@ body {background-color: #FFFFFF;color: #000000;font-family: 'Jost', sans-serif;f
 
 /*** Скрол всего сайта ***/
 ::-webkit-scrollbar {width: 1rem;height: 0;}
-::-webkit-scrollbar-thumb {border-radius: 0;background-color: #cecece;}
-::-webkit-scrollbar-track {border-radius: 0;background-color: #f3f3f3;}
+::-webkit-scrollbar-thumb {border-radius: 0;background-color: #fda800;}
+::-webkit-scrollbar-track {border-radius: 0;background-color: #dddddd;}
 
 /* Настройки максимальных размеров генерируемых изображений */
 .goods-image-icon {max-width:{SETTINGS_GOODS_IMAGES_SIZE_ICON | divide("2")}px; max-height:{SETTINGS_GOODS_IMAGES_SIZE_ICON | divide("2")}px;}
@@ -788,7 +788,7 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 #search__result .result__showAll {margin-top: 1rem;border-radius: 0;border: 0;text-align: left;}
 #search__result::-webkit-scrollbar {width: 0.5rem;height: 0;}
 #search__result::-webkit-scrollbar-thumb {border-radius: 0.5rem;background-color: #fda800;}
-#search__result::-webkit-scrollbar-track {border-radius: 0.5rem;background-color: #edf2ff;}
+#search__result::-webkit-scrollbar-track {border-radius: 0.5rem;background-color: #dddddd;}
 
 /** Корзина **/
 .cart {background-color: #ffefcf;width: 300px;}
@@ -815,6 +815,12 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 .cat-banners__item {width: calc(50% - 2rem);height: 230px;margin: 0 1rem;border-radius: 5px;background-size: cover;background-position: center center;background-repeat: no-repeat;display: inline-block;position: relative;}
 .cat-banners__title {font-size: 2rem;font-weight: bold;max-width: 220px;display: block;position: absolute;bottom: 2rem;right: 3rem;}
 .cat-banners__title span {display: block;}
+
+/*** Товары на главной ***/
+#pdt [id^="pdt__"] {display: none;position: relative;}
+#pdt [id^="pdt__"].active {display: block;}
+.products__grid.owl-carousel .product__item {display: block;width: auto;}
+.owl-carousel .owl-item {padding: 1px;}
 /** Распродажа **/
 #pdt__sales {width: 300px;}
 #pdt__sales .owl-nav [class^="owl-"] {position: absolute;top: 4px;background: transparent;}
@@ -828,7 +834,6 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 #pdt__sales .product__links a + a {margin-left: 1rem;}
 #pdt__sales .product__links a:hover {background-color: transparent;color: #fda800;}
 /** Товары на главной (Электрика и свет) **/
-#pdt__sale {margin-top: 2rem;}
 #pdt__sale .product__item {margin-bottom: 1rem;padding: 1rem 1rem 1rem 0;border-radius: 5px;border-width: 1px;border-style: dashed;border-color: transparent transparent #dddddd transparent;}
 #pdt__sale .product__item:hover {border-color: #fda800;}
 #pdt__sale .product__item form {display: flex;}
@@ -840,13 +845,6 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 #pdt__sale .product__links a {width: 40px;height: 40px;line-height: 45px;}
 #pdt__sale .price__old {display: block;margin: 0.25rem 0 0 0;}
 #pdt__sale .product__available {margin-top: 0.5rem;}
-
-/*** Товары на главной ***/
-#pdt {margin-top: 2rem;}
-#pdt [id^="pdt__"] {display: none;position: relative;}
-#pdt [id^="pdt__"].active {display: block;}
-.products__grid.owl-carousel .product__item {display: block;width: auto;}
-.products__grid.owl-carousel .owl-item {padding: 1px;}
 
 /*** Товары таблицей ***/
 .products__grid {position: relative;}
@@ -880,13 +878,23 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 
 
 
-
-.catalog__item a {font-size: 18px;display: flex;flex-wrap: wrap;align-items: flex-start;}
+/*** Категории ***/
+.catalog__item {display: flex;flex-wrap: wrap;}
+.catalog__item .catalog__image {display: none;width: 210px;height: 300px;}
+.catalog__item .catalog__image img {max-width: 210px;max-height: 300px;width: auto;}
+.catalog__item + .catalog__item {margin-top: 0.5rem;}
+.catalog__item a {font-size: 18px;display: flex;flex-wrap: wrap;align-items: flex-start;width: 100%;}
 .catalog__item a:hover {color: #0086b7;}
-.catalog__item a[data-level="0"] {font-size: 1.5rem;font-weight: 500;}
-.catalog__item a[data-level="0"] .catalog__image {width: 210px;display: inline-block;}
-.catalog__item a[data-level="0"] .catalog__name {width: calc(100% - 210px);padding: 2rem;display: inline-block;}
-
+.catalog__item[data-level="0"] {border: 1px dashed #dddddd;border-radius: 5px;}
+.catalog__item[data-level="0"]:hover {border: 1px dashed #fda800;}
+.catalog__link[data-level="0"] {width: 100%;}
+.catalog__link[data-level="0"] > .catalog__image {display: flex;}
+.catalog__link[data-level="0"] > .catalog__name {width: calc(100% - 210px);font-size: 1.5rem;font-weight: 500;padding: 1rem 2rem;}
+.sub[data-level="1"] {position: absolute;top: 63px;left: 210px;width: calc(100% - 230px);height: 210px;padding: 0 2rem;overflow-x: auto;}
+.sub[data-level="2"] {display: none;}
+.sub[data-level="1"]::-webkit-scrollbar {width: 0.5rem;height: 0;}
+.sub[data-level="1"]::-webkit-scrollbar-thumb {border-radius: 0.5rem;background-color: #fda800;}
+.sub[data-level="1"]::-webkit-scrollbar-track {border-radius: 0.5rem;background-color: #dddddd;}
 
 /*** Новости ***/
 #news [class^="news_list_"] {display: none;}
@@ -901,6 +909,21 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 #news .news__date .day {padding: 0.5rem 1rem;background-color: #fda800;color: #FFFFFF;font-size: 1.5rem;border-radius: 5px;display: inline-block;}
 #news .news__date .month {margin-left: 0.5rem;font-size: 1rem;vertical-align: middle;}
 #news .news__content {padding-left: 1.5rem;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /******************************************************************************
 *******************************************************************************/
@@ -925,8 +948,8 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 @media all and (max-width: 767px) {
 .scroll {width: 100%;overflow-x: scroll;margin-bottom: 1rem;}
 .scroll::-webkit-scrollbar {width: 0;height: 1rem;}
-.scroll::-webkit-scrollbar-thumb {border-radius: 0.5rem;background-color: #cecece;}
-.scroll::-webkit-scrollbar-track {border-radius: 0.5rem;background-color: #f3f3f3;}
+.scroll::-webkit-scrollbar-thumb {border-radius: 0.5rem;background-color: #fda800;}
+.scroll::-webkit-scrollbar-track {border-radius: 0.5rem;background-color: #dddddd;}
 }
 
 @media all and (min-width: 480px) {
