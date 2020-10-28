@@ -923,7 +923,7 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 .service__title {font-size: 18px;font-weight: 500;margin-bottom: 0.25rem;}
 
 
-#pdt__best {}
+/*** Хиты продаж ***/
 .sidebar .product__ico {display: none;}
 .sidebar .product__links {display: none;}
 .sidebar .product__ratings {display: none;}

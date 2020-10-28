@@ -2883,6 +2883,28 @@ function pdtSlider() {
     responsiveClass: true,
     responsiveRefreshRate: 100
   });
+  // Функция слайдера для "Товары на главной" на главной странице
+  $('.viewed .owl-carousel').owlCarousel({
+    items: 1,
+    margin: 0,
+    loop: false,
+    rewind: true,
+    lazyLoad: true,
+    nav: true,
+    navContainer: '.viewed .owl-nav',
+    navText: [ , ],
+    dots: false,
+    autoHeight: false,
+    autoHeightClass: 'owl-height',
+    autoplay: false,
+    autoplayHoverPause: true,
+    smartSpeed: 500,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    responsiveClass: true,
+    responsiveRefreshRate: 100
+  });
   // Функция слайдера для Новинок на главной странице
   $('#pdt__new .owl-carousel').owlCarousel({
     items: 5,
