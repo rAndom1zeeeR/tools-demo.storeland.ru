@@ -717,20 +717,6 @@ function catalogpage() {
     $(this)[0].form.submit();
   });
   
-  // Открытие каталога с сохранением вложенности
-  $('.catalog__item .open').click(function(event){
-  event.preventDefault();
-    if ($(this).closest('.parent').hasClass('opened')) {
-      $(this).parent().next('.sub').slideUp(600);
-      $(this).closest('.parent').removeClass('opened');
-      $(this).closest('.open').removeClass('opened');
-    } else {
-      $(this).parent().next('.sub').slideDown(600);
-      $(this).closest('.parent').addClass('opened');
-      $(this).closest('.open').addClass('opened');
-    }
-  });
-  
   // Открытие сортировки и показать по
   $('.selectBox .select .label').on('click',function(){
     if($(this).parent().parent().hasClass('clicked')){
@@ -3279,6 +3265,20 @@ function OpenMenu() {
       $(this).addClass('opened');
       $(this).parent().addClass('opened');
       $('#overlay').addClass('opened');
+    }
+  });
+
+  // Открытие каталога с сохранением вложенности
+  $('.catalog__item .open').click(function(event){
+    event.preventDefault();
+    if ($(this).closest('.parent').hasClass('opened')) {
+      $(this).parent().next('.sub').slideUp(600);
+      $(this).closest('.parent').removeClass('opened');
+      $(this).closest('.open').removeClass('opened');
+    } else {
+      $(this).parent().next('.sub').slideDown(600);
+      $(this).closest('.parent').addClass('opened');
+      $(this).closest('.open').addClass('opened');
     }
   });
 }

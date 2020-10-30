@@ -748,11 +748,11 @@ header .welcome a:hover {color: #fda800;border-bottom: 1px solid #fda800;}
 .contacts__block:hover .fancybox__link span {border-bottom: 1px solid #0086b7;}
 
 /** Каталог **/
-.catalog {padding: 1.25rem 0;width: 20%;}
-.catalog__icon {height: 60px;line-height: 58px;padding: 0 1.5rem;background-color: #202020;border-radius: 5px;color: #FFFFFF;font-size: 18px;display: block;}
-.catalog__icon:hover {background-color: #0086b7;color: #FFFFFF;}
-.catalog__icon i {vertical-align: middle;font-size: 24px;}
-.catalog__icon span {margin-left: 1.5rem;vertical-align: middle;}
+header .catalog {padding: 1.25rem 0;width: 20%;}
+header .catalog__icon {height: 60px;line-height: 58px;padding: 0 1.5rem;background-color: #202020;border-radius: 5px;color: #FFFFFF;font-size: 18px;display: block;}
+header .catalog__icon:hover {background-color: #0086b7;color: #FFFFFF;}
+header .catalog__icon i {vertical-align: middle;font-size: 24px;}
+header .catalog__icon span {margin-left: 1.5rem;vertical-align: middle;}
 /** Поиск **/
 header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: calc(80% - 300px);}
 .search__form {position: relative;display: flex;align-items: center;}
@@ -800,7 +800,7 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 
 /*** Основной контент ***/
 #mainblock {position: relative;}
-#mainblock .block__left {width: 20%;p}
+#mainblock .block__left {width: 20%;}
 #mainblock .block__right {width: 80%;padding-left: 2rem;}
 
 /*** Слайдер ***/
@@ -874,22 +874,22 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 
 
 /*** Категории ***/
-.catalog__item {display: flex;flex-wrap: wrap;}
-.catalog__item .catalog__image {display: none;width: 210px;height: 300px;}
-.catalog__item .catalog__image img {max-width: 210px;max-height: 300px;width: auto;}
-.catalog__item + .catalog__item {margin-top: 0.5rem;}
-.catalog__item a {font-size: 18px;display: flex;flex-wrap: wrap;align-items: flex-start;width: 100%;}
-.catalog__item a:hover {color: #0086b7;}
-.catalog__item[data-level="0"] {border: 1px dashed #dddddd;border-radius: 5px;}
-.catalog__item[data-level="0"]:hover {border: 1px dashed #fda800;}
-.catalog__link[data-level="0"] {width: 100%;}
-.catalog__link[data-level="0"] > .catalog__image {display: flex;}
-.catalog__link[data-level="0"] > .catalog__name {width: calc(100% - 210px);font-size: 1.5rem;font-weight: 500;padding: 1rem 2rem;}
-.sub[data-level="1"] {position: absolute;top: 63px;left: 210px;width: calc(100% - 230px);height: 210px;padding: 0 2rem;overflow-x: auto;}
-.sub[data-level="2"] {display: none;}
-.sub[data-level="1"]::-webkit-scrollbar {width: 0.5rem;height: 0;}
-.sub[data-level="1"]::-webkit-scrollbar-thumb {border-radius: 0.5rem;background-color: #fda800;}
-.sub[data-level="1"]::-webkit-scrollbar-track {border-radius: 0.5rem;background-color: #dddddd;}
+#catalog .catalog__item {display: flex;flex-wrap: wrap;}
+#catalog .catalog__item .catalog__image {display: none;width: 210px;height: 300px;}
+#catalog .catalog__item .catalog__image img {max-width: 210px;max-height: 300px;width: auto;}
+#catalog .catalog__item + .catalog__item {margin-top: 0.5rem;}
+#catalog .catalog__item a {font-size: 18px;display: flex;flex-wrap: wrap;align-items: flex-start;width: 100%;}
+#catalog .catalog__item a:hover {color: #0086b7;}
+#catalog .catalog__item[data-level="0"] {border: 1px dashed #dddddd;border-radius: 5px;}
+#catalog .catalog__item[data-level="0"]:hover {border: 1px dashed #fda800;}
+#catalog .catalog__link[data-level="0"] {width: 100%;}
+#catalog .catalog__link[data-level="0"] > .catalog__image {display: flex;}
+#catalog .catalog__link[data-level="0"] > .catalog__name {width: calc(100% - 210px);font-size: 1.5rem;font-weight: 500;padding: 1rem 2rem;}
+#catalog .sub[data-level="1"] {position: absolute;top: 63px;left: 210px;width: calc(100% - 230px);height: 210px;padding: 0 2rem;overflow-x: auto;}
+#catalog .sub[data-level="2"] {display: none;}
+#catalog .sub[data-level="1"]::-webkit-scrollbar {width: 0.5rem;height: 0;}
+#catalog .sub[data-level="1"]::-webkit-scrollbar-thumb {border-radius: 0.5rem;background-color: #fda800;}
+#catalog .sub[data-level="1"]::-webkit-scrollbar-track {border-radius: 0.5rem;background-color: #dddddd;}
 
 /*** Новости ***/
 #news [class^="news_list_"] {display: none;}
@@ -916,12 +916,11 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 .promo__button {margin: 0 2rem;}
 
 /*** Наш сервис ***/
-.sidebar__title {margin-bottom: 1.5rem;padding: 1rem 2rem;font-size: 1.5rem;font-weight: 500;line-height: 1.2;background-color: #f4f4f4;border-radius: 5px;display: block;}
+.sidebar__title {margin-bottom: 1.5rem;padding: 1rem 2rem;font-size: 1.5rem;font-weight: 500;line-height: 1.2;background-color: #f4f4f4;border-radius: 5px;display: block;position: relative;text-align: center;}
 .service__item {margin-bottom: 1rem;display: flex;align-items: flex-start;flex-wrap: wrap;}
 .service__icon {font-size: 60px;width: 80px;color: #fda800;}
 .service__content {width: calc(100% - 80px);}
 .service__title {font-size: 18px;font-weight: 500;margin-bottom: 0.25rem;}
-
 
 /*** Хиты продаж ***/
 .sidebar .product__ico {display: none;}
@@ -933,6 +932,16 @@ header .search {flex-grow: 1;position: relative;padding: 1.25rem 2rem;width: cal
 .sidebar .product__image img {max-width: 80px;max-height: 110px;width: auto;}
 .sidebar .product__shop {width: calc(100% - 80px);padding-left: 1rem;}
 .sidebar .product__name {margin: 0 0 1rem 0;}
+.sidebar .owl-nav [class^="owl-"] {position: absolute;top: 4px;background: transparent;color: #000000;}
+.sidebar .owl-nav [class^="owl-"]:hover {color: #fda800;}
+
+
+/*** Промо ***/
+.sidebar .catalog__item + .catalog__item {margin-top: 1rem;}
+.sidebar .catalog__item a {font-size: 18px;display: flex;align-items: center;}
+.sidebar .catalog__item .sub {display: none;margin-top: 0.75rem;padding-left: 1rem;}
+.sidebar .catalog__item .open {margin-left: 0.25rem;width: 30px;height: 30px;line-height: 30px;text-align: center;z-index: 9;}
+.sidebar .catalog__item .open:before {content: "\e912";font-family: 'icomoon';font-size: 0.75rem;}
 
 
 

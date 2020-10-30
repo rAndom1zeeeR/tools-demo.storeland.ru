@@ -351,13 +351,29 @@
 			<div class="inner">
 				<div class="block__left sidebar">
 					<!-- Каталог TODO -->
+					<div class="sidebar__block catalog">
+						<div class="sidebar__content">
+							<div class="catalog__items">
+								{% FOR catalog_full %}
+								{% IF catalog_full.FIRST %}{% IFNOT catalog_full.LEVEL = 0 %}<div data-level="{catalog_full.LEVEL}" class="sub">{% ENDIF %}{% ENDIF %}
+								<div {% IF catalog_full.HIDE %}style="display:none;"{% ENDIF %} data-level="{catalog_full.LEVEL}" class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}opened{% ENDIF %}">
+									<a href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}" class="catalog__link {% IF catalog_full.CURRENT %}opened{% ENDIF %}">
+										<span>{catalog_full.NAME}</span>
+										{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="open"></span>{% ENDIF %}
+									</a>
+									{% IF catalog_full.ISSET_SUB=0 %}</div>{% ENDIF %}
+								{% IF catalog_full.LAST %}{%FOR out%}</div> {%IFNOT catalog_full.out.LAST%}</div>{%ENDIF%}{%ENDFOR%}{% ENDIF %}
+							{% ENDFOR %}
+						</div>
+					</div>
 					
-					
-					
-					<!-- Хиты продаж TODO сделать стрелки навигации -->
+					<!-- Хиты продаж -->
 					{% IFNOT index_page_favorites_goods_empty %}
 					<div class="sidebar__block" id="pdt__best" data-content="pdt__best">
-						<div class="sidebar__title">Лидеры продаж</div>
+						<div class="sidebar__title">
+							<span>Лидеры продаж</span>
+							<div class="owl-nav"></div>
+						</div>
 						<div class="preloader"><div class="loading"></div></div>
 						<div class="products__grid owl-carousel">
 							<div class="product__items">
@@ -554,7 +570,10 @@
 					<!-- Вы смотрели TODO сделать стрелки навигации -->
 					{% IFNOT recently_viewed_goods_empty %}
 					<div class="sidebar__block viewed" data-content="viewed">
-						<div class="sidebar__title">Вы смотрели</div>
+						<div class="sidebar__title">
+							<span>Вы смотрели</span>
+							<div class="owl-nav"></div>
+						</div>
 						<div class="preloader"><div class="loading"></div></div>
 						<div class="products__grid owl-carousel">
 							<div class="product__items">
