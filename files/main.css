@@ -314,7 +314,7 @@ label.error:after {content: ' ';position: absolute;top: -7px;left: 0.875rem;widt
 .pages .icon-arrow-right:before {content: "\e906";}
 
 /*** Общие блоки ***/
-section {margin: 2rem 0;}
+section {margin: 2rem 0;position: relative;}
 #main .block__left {width: 240px;padding-right: 1rem;flex-grow: 1;}
 #main .block__left.hide {display: none;}
 #main .block__right.hasLeft {width: calc(100% - 240px);padding-left: 1rem;flex-grow: 1;}

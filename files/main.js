@@ -3117,7 +3117,7 @@ function newsCarousel() {
       onChanged: carouselInitialized
     });
     $("#news .news_list_shop.owl-carousel").owlCarousel({
-      items: 3,
+      items: 4,
       margin: 32,
       loop: false,
       rewind: true,
@@ -3142,8 +3142,9 @@ function newsCarousel() {
         481:{items:2},
         641:{items:3},
         768:{items:3},
-        992:{items:4},
-        1200:{items:3}
+        992:{items:3},
+        1200:{items:3},
+        1680:{items:4}
       },
       onInitialize: carouselInitialized,
       onInitialized: carouselInitialized,
