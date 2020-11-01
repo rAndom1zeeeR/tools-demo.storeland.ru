@@ -3284,6 +3284,50 @@ function OpenMenu() {
   });
 }
 
+// Дополнительные пункты меню в шапке Перенос пунктов меню
+function mainnavHeader(){
+  let mainnav = $('.header__menu .mainnav');
+  let overMenuExist = mainnav.find('.overflowMenu li').length;
+  if(overMenuExist){
+    mainnav.find('.overflowMenu li').removeClass('mainnav__replaced');
+    mainnav.find('.mainnav__more').remove();
+    mainnav.find('.overflowMenu li').each(function(){
+      mainnav.find('.mainnav__list').append($(this));
+    });
+  }
+  let menuWidth = mainnav.width();
+  let menuCount = mainnav.find('.mainnav__list li').length + 1;
+  let nextCheck = 0;
+  for(let i=1; i < menuCount;  i++){
+    let currentWidth = parseInt(Math.ceil(mainnav.find('.mainnav__list li:nth-child('+i+')').width())) + 16;
+    nextCheck += currentWidth;
+    if(nextCheck > menuWidth){
+      let a = i;
+      for(a;a < menuCount;a++){
+        mainnav.find('.mainnav__list li:nth-child('+ a +')').addClass('mainnav__replaced');
+      }
+      mainnav.find('.mainnav__replaced').each(function(){
+        mainnav.find('.overflowMenu').append($(this));
+      });
+      mainnav.find('.mainnav__list').append('<li class="mainnav__item mainnav__more"><a class="mainnav__link">Еще...</a></li>');
+      mainnav.find('.mainnav__more').on('click',function(){
+        mainnav.find('.overflowMenu').hasClass('opened') ? mainnav.find('.overflowMenu').removeClass('opened') : mainnav.find('.overflowMenu').addClass('opened');
+        mainnav.hasClass('opened') ? mainnav.removeClass('opened') : mainnav.addClass('opened');
+      });
+      $(function($){
+        $(document).mouseup(function (e){
+          let div =  mainnav.find('.overflowMenu.opened');
+          let btn =  mainnav.find('.mainnav__more');
+          if (!div.is(e.target) && div.has(e.target).length === 0 && !btn.is(e.target)) {
+            div.removeClass('opened');
+            mainnav.removeClass('opened');
+          }
+        });
+      });
+      return false;
+    }
+  }
+}
 
 // Много и Мало вместо точного количества
 function goodsModRest() {
@@ -3390,6 +3434,7 @@ $(document).ready(function(){
   quantity();
   priceDiff();
   monthNames();
+  mainnavHeader();
   // Ленивая загрузка
   $(function(){
     const observer = lozad(); // lazy loads elements with default selector as '.lozad'
