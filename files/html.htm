@@ -376,7 +376,7 @@
 					</div>
 					
 					<!-- Хиты продаж -->
-					{% IFNOT index_page_favorites_goods_empty %}
+					{% IFNOT index_page_favorites_goods_empty && index_page %}
 					<div class="sidebar__block" id="pdt__best" data-content="pdt__best">
 						<div class="sidebar__title">
 							<span>Лидеры продаж</span>
@@ -2093,7 +2093,7 @@
 	});
 	{% ELSE %}
 	$(document).ready(function () {
-		recViewed();
+	
 	});
 	{% ENDIF %}
 	// Модальное окно уведомления при отправке сообщения

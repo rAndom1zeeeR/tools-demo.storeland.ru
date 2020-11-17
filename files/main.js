@@ -2840,7 +2840,7 @@ function pdtSlider() {
       991:{items:2}
     }
   });
-  // Функция слайдера для "Товары на главной" на главной странице
+  // Функция слайдера для "Лидеры продаж" на главной странице
   $('#pdt__best .owl-carousel').owlCarousel({
     items: 1,
     margin: 0,
@@ -2849,28 +2849,6 @@ function pdtSlider() {
     lazyLoad: true,
     nav: true,
     navContainer: '#pdt__best .owl-nav',
-    navText: [ , ],
-    dots: false,
-    autoHeight: false,
-    autoHeightClass: 'owl-height',
-    autoplay: false,
-    autoplayHoverPause: true,
-    smartSpeed: 500,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    responsiveClass: true,
-    responsiveRefreshRate: 100
-  });
-  // Функция слайдера для "Товары на главной" на главной странице
-  $('.viewed .owl-carousel').owlCarousel({
-    items: 1,
-    margin: 0,
-    loop: false,
-    rewind: true,
-    lazyLoad: true,
-    nav: true,
-    navContainer: '.viewed .owl-nav',
     navText: [ , ],
     dots: false,
     autoHeight: false,
@@ -3173,15 +3151,14 @@ function newsCarousel() {
 
 // Функции для главной страницы
 function recViewed() {
-  // Функция слайдера для Хитов продаж на главной странице
-  $('#viewed .owl-carousel').owlCarousel({
-    items: 4,
+  $('.viewed .owl-carousel').owlCarousel({
+    items: 1,
     margin: 0,
     loop: false,
     rewind: true,
     lazyLoad: true,
     nav: true,
-    navContainer: '#viewed .owl-nav',
+    navContainer: '.viewed .owl-nav',
     navText: [ , ],
     dots: false,
     autoHeight: false,
@@ -3193,18 +3170,11 @@ function recViewed() {
     touchDrag: true,
     pullDrag: true,
     responsiveClass: true,
-    responsiveRefreshRate: 100,
-    responsive: {
-      0:{items:1},
-      320:{items:1},
-      481:{items:2},
-      641:{items:2},
-      768:{items:3},
-      992:{items:3},
-      1200:{items:4}
-    }
+    responsiveRefreshRate: 100
   });
 }
+
+
 
 
 // Открытие Контактов, Меню, Сравнения, Избранного
@@ -3428,6 +3398,7 @@ $(document).ready(function(){
   priceDiff();
   monthNames();
   mainnavHeader();
+  recViewed();
   // Ленивая загрузка
   $(function(){
     const observer = lozad(); // lazy loads elements with default selector as '.lozad'
