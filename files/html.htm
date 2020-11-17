@@ -270,10 +270,16 @@
 							{% ENDFOR %}
 						</div>
 					</div>
+					<!-- Меню -->
+					<div class="menu__icon button dropdown__open" data-open="menu">
+						<span>Меню</span>
+						<i class="icon-navigate_down"></i>
+					</div>
 					<!-- Поиск -->
+					<div class="search__icon"><i class="icon-notify"></i></div>
 					<div class="search" itemscope itemtype="https://schema.org/WebSite">
 						<link itemprop="url" href="{INDEX_PAGE_URL}"/>
-						<form class="search__form bordered" action="{QUICK_SEARCH_URL}" method="get" title="Поиск по магазину" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
+						<form class="search__form" action="{QUICK_SEARCH_URL}" method="get" title="Поиск по магазину" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
 							<meta itemprop="target" content="{SEARCH_URL}?q={{EMPTY}q}" />
 							<input type="hidden" name="goods_search_field_id" value="0" />
 							<input type="text" name="q" value="{FORM_SEARCH_Q}" class="search__input" placeholder="Поиск" autocomplete="off" itemprop="query-input" />
@@ -342,13 +348,12 @@
 							</div>
 						</div>
 					</div>
-				
 				</div>
 			</div>
 		</div>
 	</header>
 	
-	
+	<!-- Основная часть -->
 	<section id="mainblock">
 		<div class="container">
 			<div class="inner">
@@ -766,25 +771,27 @@
 					<div class="sidebar__block service">
 						<div class="sidebar__title">Наш сервис</div>
 						<div class="sidebar__content">
-							<div class="service__item">
-								<div class="service__icon"><i class="icon-present"></i></div>
-								<div class="service__content">
-									<div class="service__title">Бесплатная доставка</div>
-									<div class="service__text">С помощью почты или транспортной компании</div>
+							<div class="service__items">
+								<div class="service__item">
+									<div class="service__icon"><i class="icon-present"></i></div>
+									<div class="service__content">
+										<div class="service__title">Бесплатная доставка</div>
+										<div class="service__text">С помощью почты или транспортной компании</div>
+									</div>
 								</div>
-							</div>
-							<div class="service__item">
-								<div class="service__icon"><i class="icon-payment"></i></div>
-								<div class="service__content">
-									<div class="service__title">Безопасная оплата</div>
-									<div class="service__text">Вы платите деньги при получении товара</div>
+								<div class="service__item">
+									<div class="service__icon"><i class="icon-payment"></i></div>
+									<div class="service__content">
+										<div class="service__title">Безопасная оплата</div>
+										<div class="service__text">Вы платите деньги при получении товара</div>
+									</div>
 								</div>
-							</div>
-							<div class="service__item">
-								<div class="service__icon"><i class="icon-service"></i></div>
-								<div class="service__content">
-									<div class="service__title">Техподдержка</div>
-									<div class="service__text">Наши операторы ответят на любой ваш вопрос</div>
+								<div class="service__item">
+									<div class="service__icon"><i class="icon-service"></i></div>
+									<div class="service__content">
+										<div class="service__title">Техподдержка</div>
+										<div class="service__text">Наши операторы ответят на любой ваш вопрос</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -792,6 +799,7 @@
 					
 				</div>
 				<div class="block__right">
+					{% IF index_page %}
 					<!-- Слайдшоу -->
 					<div class="inner">
 						<div class="preloader"><div class="loading"></div></div>
@@ -889,6 +897,29 @@
 											<span class="price__old {CURRENCY_CHAR_CODE}">{index_page_sale_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
 											{% ELSEIF index_page_sale_goods.MIN_PRICE_OLD>index_page_sale_goods.MIN_PRICE_NOW %}
 											<span class="price__old {CURRENCY_CHAR_CODE}">{index_page_sale_goods.MIN_PRICE_OLD | money_format}</span>
+											{% ENDIF %}
+											<!-- Рейтинг -->
+											{% IFNOT SETTINGS_OPINION_DISABLE %}
+											<div class="product__ratings">
+												<div class="ratings">
+													{% IF index_page_sale_goods.OPINION_RATING_VALUE %}
+													<span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+					                <meta itemprop="worstRating" content = "1">
+					                <meta itemprop="bestRating" content = "10">
+					                <meta itemprop="ratingValue" content = "{index_page_sale_goods.OPINION_RATING_VALUE}">
+					                <meta itemprop="reviewCount" content = "{index_page_sale_goods.OPINION_RATING_CNT_ALL}">
+					                <div class="rating" style="width:{goods.OPINION_RATING_VALUE}0%" alt="{index_page_sale_goods.OPINION_RATING_VALUE}" title="Рейтинг товара"></div>
+					              </span>
+													{% ELSE %}
+													<div class="rating" style="width:0%" alt="Рейтинг не определён" title="Рейтинг не определён"></div>
+													{% ENDIF %}
+												</div>
+												<!-- Доступность товара -->
+												<div class="product__available">
+													<div class="available__true"><span>В наличии </span><span class="goodsModRestValue" data-value="{index_page_new_goods.MAX_REST_VALUE}">{% IF index_page_new_goods.MAX_REST_VALUE > 10 %}Много{% ELSE %}Мало{% ENDIF %}</span></div>
+													<div class="available__false"><span>Нет в наличии</span></div>
+												</div>
+											</div>
 											{% ENDIF %}
 										</div>
 										<!-- Добавление товара в избранное и сравнение и в корзину -->
@@ -1390,7 +1421,9 @@
 					<!-- Категории -->
 					<section id="catalog">
 						<div class="block__title block__nav">
-							<a href="{CATALOG_URL}" class="title">Популярные категории</a>
+							<div class="nav__tabs">
+								<a href="{CATALOG_URL}" class="title">Популярные категории</a>
+							</div>
 							<div class="owl-nav"></div>
 						</div>
 						<div class="catalog__items owl-carousel">
@@ -1407,11 +1440,13 @@
 						{% ENDFOR %}
 					</section>
 					
-					<!-- . Электрика и свет -->
+					<!-- Электрика и свет -->
 					{% IFNOT index_page_goods_empty %}
 					<section id="pdt__cat" data-content="pdt__cat">
 						<div class="block__title block__nav">
-							<a href="{CATALOG_INDEX_PAGE_URL}" class="title">Электрика и свет</a>
+							<div class="nav__tabs">
+								<a href="{CATALOG_INDEX_PAGE_URL}" class="title">Электрика и свет</a>
+							</div>
 							<div class="owl-nav"></div>
 						</div>
 						<div class="preloader"><div class="loading"></div></div>
@@ -1579,6 +1614,14 @@
 					</section>
 					{% ENDIF %}
 					
+					<!--  -->
+					<section id="main">
+						<div class="block__title block__nav">
+							<h1 class="title">{% IF NESTED_CATEGORIES_LIST_LEVEL %}Каталог товаров{% ELSE %}{PAGE_TITLE}{% ENDIF %}</h1>
+						</div>
+						<div>{BODY}</div>
+					</section>
+					
 					<!-- Новости -->
 					{% IF news_list_all_empty=0 || news_list_shop_empty=0 || news_list_articles_empty=0 || news_list_mass_media_empty=0 %}
 					<section id="news">
@@ -1680,11 +1723,20 @@
 						{% ENDIF %}
 					</section>
 					{% ENDIF %}
+					
+					{% ELSE %}
+					
+					<section id="main">
+						<div>{BODY}</div>
+					</section>
+					
+					{% ENDIF index_page %}
 				</div>
 			</div>
 		</div>
 	</section>
 	
+	<!-- Подвал -->
 	<footer id="footer">
 		<div class="footer__top">
 			<div class="container">
@@ -1737,7 +1789,7 @@
 				</div>
 			</div>
 		</div>
-		
+		<!-- Подвал. Основные блоки -->
 		<div class="footer__middle">
 			<div class="container">
 				<div class="row">
@@ -1842,7 +1894,7 @@
 				</div>
 			</div>
 		</div>
-		
+		<!-- Подвал. Нижняя часть -->
 		<div class="footer__bottom">
 			<div class="container">
 				<!-- Подвал. Копирайт -->
