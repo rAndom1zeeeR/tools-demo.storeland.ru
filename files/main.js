@@ -2779,6 +2779,15 @@ function pdtBrands() {
   });
 }
 
+$.fn.extend({
+  toggleText: function (a, b) {
+    var toggle = false, that = this;
+    this.on('click', function () {
+      that.text((toggle = !toggle) ? b : a);
+    });
+    return this;
+  }
+});
 
 // Функция слайдеров на главной
 function pdtSlider() {
@@ -2812,32 +2821,6 @@ function pdtSlider() {
       992:{items:1},
       1200:{items:1},
       1440:{items:1}
-    }
-  });
-  // Функция слайдера для "Товары на главной" на главной странице
-  $('#pdt__cat .owl-carousel').owlCarousel({
-    items: 2,
-    margin: 32,
-    loop: false,
-    rewind: true,
-    lazyLoad: true,
-    nav: true,
-    navContainer: '#pdt__cat .owl-nav',
-    navText: [ , ],
-    dots: false,
-    autoHeight: false,
-    autoHeightClass: 'owl-height',
-    autoplay: false,
-    autoplayHoverPause: true,
-    smartSpeed: 500,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    responsiveClass: true,
-    responsiveRefreshRate: 100,
-    responsive: {
-      0:{items:1},
-      991:{items:2}
     }
   });
   // Функция слайдера для "Лидеры продаж" на главной странице
@@ -2955,6 +2938,56 @@ function pdtSlider() {
     $(this).addClass('active');
     $('#pdt [id^="pdt__"][data-content="'+ content +'"').addClass('active');
   });
+
+  // Кол-во отображаемых товаров
+  if(getClientWidth() > 991){
+    var GOODS_INDEX = 6;
+  }else{
+    var GOODS_INDEX = 3;
+  }
+  // Весь каталог на главной
+  if(catalog_full){
+    var promises = $.map(catalog_full, function(el){
+      return $.ajax(el.href + '?only_body=1&goods_view_type=0')
+        .then(function(d){
+          let container = $('.products__container.' + el.id);
+          let $parentGridContainer = container.find('.products__list');
+          let $data = $(d);
+          let $newProducts = $data.find('.products__list').find('.product__item').parent();
+          let itemsLength = $data.find('.products__list .product__item').length;
+          let buttons = $('.products__container.' + el.id).find('.nav__buttons');
+          $newProducts = $newProducts.html();
+          // Вывод товаров
+          if(!$parentGridContainer.find('.products__list').length){
+            $parentGridContainer.append($newProducts);
+          }
+          // Добавляем кнопку "Показать все"
+          if(itemsLength > GOODS_INDEX){
+            buttons.append($('<button class="button button3 small"></button>'))
+            buttons.show();
+          }else{
+            buttons.hide();
+          }
+          // Показать все, скрыть
+          buttons.find('button').on('click', function (event){
+            event.preventDefault();
+            container.toggleClass('active')
+            $(this).toggleClass('active')
+          });
+          // Загрузка скриптов
+          lozad().observe();
+          Addto();
+          AddCart();
+          quantity();
+        });
+    });
+    $.when.apply(this, promises)
+      .then(function(){
+        // catalog_full = null;
+        // $('.products-container').show();
+      })
+  }
+
 }
 
 // Слайдер для главной страницы
