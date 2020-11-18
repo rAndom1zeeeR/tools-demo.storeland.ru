@@ -742,7 +742,7 @@ header .welcome {display: none;}
 #addto [data-count]:before {content: "(";display: inline-block;}
 #addto [data-count]:after {content: ")";display: inline-block;}
 @media all and (max-width: 767px) {
-#addto {text-align: left;}
+#addto {text-align: center;}
 }
 @media all and (max-width: 480px) {
 #addto .addto__label i {display: inline-block;margin: 0;}
@@ -779,6 +779,10 @@ header .logo .title {display: none;}
 @media all and (max-width: 1199px) {
 .header__menu {padding: 0;}
 }
+@media all and (max-width: 991px) {
+header .inner {justify-content: center;}
+.header__menu {padding: 0;width: auto;flex-grow: 0;}
+}
 @media all and (max-width: 640px) {
 .header__menu .menu__icon {padding: 0 1.5rem;}
 .header__menu .menu__icon i {margin-left: 0.5rem;}
@@ -803,7 +807,7 @@ header .logo .title {display: none;}
 .contacts__block:hover .fancybox__link span {border-bottom: 1px solid #0086b7;}
 /* Контакты. Адаптивность */
 @media all and (max-width: 991px) {
-.header__contacts {width: 100%;margin-top: 2rem;justify-content: flex-start;}
+.header__contacts {width: 100%;margin-top: 2rem;justify-content: center;}
 }
 @media all and (max-width: 640px) {
 .contacts__block {font-size: 1rem;}
@@ -813,7 +817,7 @@ header .logo .title {display: none;}
 }
 @media all and (max-width: 480px) {
 .contacts__block + .contacts__block {display: none;}
-.header__contacts {width: auto;margin: 0;justify-content: flex-end;}
+.header__contacts {width: auto;margin: 0 0 0 2rem;justify-content: flex-end;}
 }
 
 /** Каталог **/
