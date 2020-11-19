@@ -70,34 +70,6 @@
 								<span>Сравнение</span>
 								<span class="compare__count" data-count="{COMPARE_GOODS_COUNT}">{COMPARE_GOODS_COUNT}</span>
 							</a>
-							<div id="addtoCompare" class="addto__compare dropdown__content" data-open="compare">
-								<div class="addto__title">В Сравнении</div>
-								<div class="addto__items">
-									{% FOR compare_goods %}
-									<div class="addto__item" data-id="{compare_goods.ID}">
-										<a href="{compare_goods.URL}" title="{compare_goods.NAME}" class="addto__image"><img src="{% IF compare_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=THEMENAME{% ELSE %}{compare_goods.IMAGE_ICON}{% ENDIF %}" class="goods-image-icon" /></a>
-										<div class="addto__shop">
-											<!-- Название -->
-											<a href="{compare_goods.URL}" class="addto__name" title="{compare_goods.NAME}"><span>{compare_goods.NAME}</span></a>
-											<!-- Цена -->
-											<div class="addto__price {CURRENCY_CHAR_CODE}">
-												<div class="price__now">{compare_goods.MIN_PRICE_NOW | money_format}</div>
-												<!-- Удаление -->
-												<a href="{COMPARE_DELETE_URL}?id={compare_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{compare_goods.MIN_PRICE_NOW_ID}" class="addto__remove remove" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"><span>Удалить</span></a>
-											</div>
-										</div>
-									</div>
-									{% ENDFOR %}
-								</div>
-								<div class="addto__empty">
-									<div class="addto__title">Ваш список сравнения пуст</div>
-									<a href="{CATALOG_URL}" class="button addto__close" title="Продолжить покупки">Продолжить покупки</a>
-								</div>
-								<div class="addto__buttons">
-									<a href="{COMPARE_RESET_URL}" onclick="removeFromCompareAll($(this))" class="button button3 removeAll" title="Очистить список сравнения"><span>Очистить сравнение</span></a>
-									<a href="{COMPARE_URL}" class="button" title="Перейти к Сравнению">Перейти к Сравнению</a>
-								</div>
-							</div>
 						</div>
 						<span class="separator"></span>
 						{% ENDIF %}
@@ -108,37 +80,9 @@
 								<span>Избранное</span>
 								<span class="favorites__count" data-count="{FAVORITES_GOODS_COUNT}">{FAVORITES_GOODS_COUNT}</span>
 							</a>
-							<div id="addtoFavorites" class="addto__favorites dropdown__content" data-open="favorites">
-								<div class="addto__title">В Избранном</div>
-								<div class="addto__items">
-									{% FOR favorites_goods %}
-									<div class="addto__item" data-id="{favorites_goods.ID}">
-										<a href="{favorites_goods.URL}" title="{favorites_goods.NAME}" class="addto__image"><img src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=THEMENAME{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" class="goods-image-icon" /></a>
-										<div class="addto__shop">
-											<!-- Название -->
-											<a href="{favorites_goods.URL}" class="addto__name" title="{favorites_goods.NAME}">{favorites_goods.NAME}</a>
-											<!-- Цена -->
-											<div class="addto__price {CURRENCY_CHAR_CODE}">
-												<div class="price__now">{favorites_goods.MIN_PRICE_NOW | money_format}</div>
-												<!-- Удаление -->
-												<a href="{FAVORITES_DELETE_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{favorites_goods.MIN_PRICE_NOW_ID}" class="addto__remove remove" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"><span>Удалить</span></a>
-											</div>
-										</div>
-									</div>
-									{% ENDFOR %}
-								</div>
-								<div class="addto__empty">
-									<div class="addto__title">Ваш список избранного пуст</div>
-									<a href="{CATALOG_URL}" class="button addto__close" title="Продолжить покупки">Продолжить покупки</a>
-								</div>
-								<div class="addto__buttons">
-									<a href="{FAVORITES_RESET_URL}" onclick="removeFromFavoritesAll($(this))" class="button button3 removeAll" title="Очистить список Избранного"><span>Очистить Избранное</span></a>
-									<a href="{FAVORITES_URL}" class="button" title="Перейти к Избранному">Перейти к Избранному</a>
-								</div>
-							</div>
 						</div>
 						<span class="separator"></span>
-						<!-- Войти -->
+						<!-- Войти TODO нужна иконка входа -->
 						<div class="login dropdown">
 							<a href="{USER_LOGIN_URL}" class="addto__label dropdown__open login__icon" title="Личный кабинет" data-open="login">
 								<i class="icon-login"></i>
@@ -357,9 +301,135 @@
 	<section id="mainblock">
 		<div class="container">
 			<div class="inner">
-				<div class="block__left sidebar">
+				{% IFNOT index_page %}
+				<!-- Заголовок страницы -->
+				<div id="page__title">
+					{% IF MOD_LNAME=user && ACT=login %}
+					<div class="block__title"><h1 class="title">Войти или зарегистрироваться</h1></div>
+					{% ELSEIF MOD_LNAME=user && ACT=change %}
+					<div class="block__title"><h1 class="title">Активация нового пароля</h1></div>
+					{% ELSEIF MOD_LNAME=user && ACT=recovery %}
+					<div class="block__title"><h1 class="title">Восстановление пароля</h1></div>
+					{% ELSEIF MOD_LNAME=user && ACT=favorites %}
+					<div class="block__title"><h1 class="title">Сохраненные товары</h1></div>
+					{% ELSEIF MOD_LNAME=user  && ACT=history_list %}
+					<div class="block__title"><h1 class="title">Мои заказы</h1></div>
+					{% ELSEIF MOD_LNAME=user && ACT=settings %}
+					<div class="block__title"><h1 class="title">Личный кабинет</h1></div>
+					{% ELSEIF MOD_LNAME=user && ACT=register %}
+					<div class="block__title"><h1 class="title">Регистрация клиента</h1></div>
+					{% ELSEIF MOD_LNAME=order && ACT=stage %}
+					<div class="block__title"><h1 class="title">Оформление заказа. Шаг {ORDER_STAGE_NUM} из 4</h1></div>
+					{% ELSEIF MOD_LNAME=search %}
+					<div class="block__title"><h1 class="title">Результат поиска по запросу: {% IFNOT search_query_empty %}&laquo;{SEARCH_QUERY}&raquo; <div class="subtitle">({GOODS_PAGES_RESULTS} товар{GOODS_PAGES_RESULTS | gen_word_end("","а","ов")} найд{GOODS_PAGES_RESULTS | gen_word_end("ен","ено","ено")} по запросу)</div>{% ENDIF %}</h1></div>
+					{% ELSEIF MOD_LNAME=discount && ACT=index && ID %}
+					<div class="block__title"><h1 class="title">{PROMOTIONAL_CAMPAIGN_NAME}</h1></div>
+					{% ELSEIF MOD_LNAME=discount && ACT=index %}
+					<div class="block__title"><h1 class="title">Акции</h1></div>
+					{% ELSEIF MOD_LNAME=feedback %}
+					<div class="block__title"><h1 class="title">Связь с администрацией</h1></div>
+					{% ELSEIF CURRENT_URL=NEWS_SHOP_URL || CURRENT_URL=NEWS_ARTICLES_URL  || CURRENT_URL=NEWS_MASS_MEDIA_URL %}
+					<div class="block__title"><h1 class="title">{NEWS_SECTION_NAME}</h1></div>
+					{% ELSEIF MOD_LNAME=news %}
+					<div class="block__title"><h1 class="title">{PAGE_TITLE}</h1></div>
+					{% ELSEIF MOD_LNAME=compare %}
+					<div class="block__title"><h1 class="title">{% IF compare_list_empty %}Ваш список сравнения пуст{% ELSE %}Сравнение товаров{% ENDIF %}</h1></div>
+					{% ELSEIF MOD_LNAME=page %}
+					<div class="block__title"><h1 class="title">{PAGE_NAME}</h1></div>
+					{% ELSEIF MOD_LNAME= %}
+					<div class="block__title"><h1 class="title">Внутренняя ошибка сервера. {MSG_HEADER}</h1></div>
+					{% ELSEIF MOD_LNAME=callback %}
+					<div class="block__title"><h1 class="title">Заказ обратного звонка</h1></div>
+					{% ELSEIF MOD_LNAME=catalog %}
+					<div class="block__title"><h1 class="title">{CATEGORY_NAME}</h1></div>
+					{% ELSEIF MOD_LNAME=cart %}
+					<div class="block__title"><h1 class="title"><a href="{CART_URL}" title="Корзина">Корзина</a></h1></div>
+					{% ELSEIF MOD_LNAME=goods %}
+					<div class="block__title"><h1 class="title">{GOODS_NAME}</h1></div>
+					{% ENDIF %}
+					<!-- Хлебные крошки -->
+					<div id="breadcrumbs">
+						<ul itemscope itemtype="https://schema.org/BreadcrumbList">
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="home"><a itemprop="item" href="{INDEX_PAGE_URL}" title="Перейти на главную"><i class="icon-house"></i><span itemprop="name">Главная</span><meta itemprop="position" content="1" /></a></li>
+							{% IF MOD_LNAME=cart %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">{% IF cart_items_empty %}Корзина покупок пуста{% ELSE %}Корзина{% ENDIF %}</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=user && ACT=login %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Войти или зарегистрироваться</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=user && ACT=change %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{USER_RECOVERY_URL}" title="Восстановление пароля"><span itemprop="name">Восстановление пароля</span><meta itemprop="position" content="2" /></a></li>
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Активация нового пароля</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=user && ACT=recovery %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Восстановление пароля</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=user && ACT=favorites %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Сохраненные товары</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=user && ACT=history_info %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{USER_SETTINGS_URL}" title="Личный кабинет"><span itemprop="name">Личный кабинет</span><meta itemprop="position" content="2" /></a></li>
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{USER_HISTORY_LIST_URL}" title="История моих заказов"><span itemprop="name">Мои заказы</span><meta itemprop="position" content="3" /></a></li>
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Карточка заказа</span><meta itemprop="position" content="4" /></li>
+							{% ELSEIF MOD_LNAME=user  && ACT=history_list %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{USER_SETTINGS_URL}" title="Личный кабинет"><span itemprop="name">Личный кабинет</span><meta itemprop="position" content="2" /></a></li>
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Мои заказы</span><meta itemprop="position" content="3" /></li>
+							{% ELSEIF MOD_LNAME=user && ACT=settings %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Личный кабинет</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=user && ACT=register %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Регистрация клиента</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=order && ACT=stage %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{CART_URL}" title="Перейти в корзину"><span itemprop="name">Корзина</span><meta itemprop="position" content="2" /></a></li>
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Оформление заказа</span><meta itemprop="position" content="3" /></li>
+							{% ELSEIF MOD_LNAME=search %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Поиск</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=discount && ACT=index && ID %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{DISCOUNT_URL}" title="Перейти на страницу акций магазина"><span itemprop="name">Акции магазина</span><meta itemprop="position" content="2" /></a></li>
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">{PROMOTIONAL_CAMPAIGN_NAME}</span><meta itemprop="position" content="3" /></li>
+							{% ELSEIF MOD_LNAME=discount && ACT=index %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Акции магазина</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=order && ACT=info %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{CART_URL}" title="Перейти в корзину"><span itemprop="name">Корзина</span><meta itemprop="position" content="2" /></a></li>
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{CART_URL}"><span itemprop="name">Оформление заказа</span><meta itemprop="position" content="3" /></a></li>
+							<li><span>Заказ {% IF ORDER_NUM %}№{ORDER_NUM}{% ENDIF %} успешно оформлен.</span></li>
+							{% ELSEIF MOD_LNAME=feedback && ACT=index %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Связь с администрацией</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF CURRENT_URL=NEWS_SHOP_URL || CURRENT_URL=NEWS_ARTICLES_URL  || CURRENT_URL=NEWS_MASS_MEDIA_URL || CURRENT_URL=NEWS_ALL_URL %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">{NEWS_SECTION_NAME}</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=news %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{NEWS_SECTION_URL}" title="{NEWS_SECTION_NAME}"><span itemprop="name">{NEWS_SECTION_NAME}</span><meta itemprop="position" content="2" /></a></li>
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">{NEWS_TITLE}</span><meta itemprop="position" content="3" /></li>
+							{% ELSEIF MOD_LNAME=compare %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Список сравнения</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=page %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">{PAGE_NAME}</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME= %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Внутренняя ошибка сервера</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=callback %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Заказ обратного звонка</span><meta itemprop="position" content="2" /></li>
+							{% ELSEIF MOD_LNAME=goods %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{CATALOG_URL}" title="Перейти в каталог товаров"><span itemprop="name">Каталог</span><meta itemprop="position" content="2" /></a></li>
+							{% FOR upper_navigation %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{upper_navigation.URL}" title="Перейти в категорию &laquo;{upper_navigation.NAME}&raquo;"><span itemprop="name" title="{upper_navigation.NAME}">{upper_navigation.NAME}</span><meta itemprop="position" content="{upper_navigation.LEVEL | plus("3")}" /></a></li>
+							{% ENDFOR %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name" title="{GOODS_NAME}">{GOODS_NAME}</span><meta itemprop="position" content='{% FOR upper_navigation %}{%IF upper_navigation.last%}{upper_navigation.index | plus("3")}{%ENDIF%}{%ENDFOR%}' /></li>
+							{% ELSEIF MOD_LNAME=catalog %}
+							{% IF IS_FULL_CATALOG %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><span itemprop="name">Каталог</span><meta itemprop="position" content="2" /></li>
+							{% ELSE %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{CATALOG_URL}" title="Перейти в каталог продукции нашего магазина"><span itemprop="name">Каталог</span><meta itemprop="position" content="2" /></a></li>
+							{% FOR upper_navigation %}
+							{% IF upper_navigation.CURRENT %}
+							<li><span title="{upper_navigation.NAME}">{upper_navigation.NAME}</span></li>
+							{% ELSEIF upper_navigation.CURRENT_PARENT %}
+							<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a itemprop="item" href="{upper_navigation.URL}" title="Перейти в категорию &laquo;{upper_navigation.NAME}&raquo;"><span itemprop="name" title="{upper_navigation.NAME}">{upper_navigation.NAME}</span><meta itemprop="position" content='{upper_navigation.index | plus("2")}' /></a></li>
+							{% ENDIF %}
+							{% ENDFOR upper_navigation %}
+							{% ENDIF %}
+							{% ENDIF %}
+						</ul>
+					</div>
+				</div>
+				{% ENDIF %}
+				
+				<div class="block__left sidebar {% IF MOD_LNAME = cart %}hide{% ENDIF %}">
 					<!-- Каталог -->
-					{% IF MOD_LNAME = catalog %}
+					{% IFNOT MOD_LNAME = catalog %}
 					<div class="sidebar__block catalog">
 						<div class="sidebar__content">
 							<div class="catalog__items">
@@ -376,6 +446,7 @@
 						</div>
 					</div>
 					{% ENDIF %}
+					
 					<!-- Хиты продаж -->
 					{% IFNOT index_page_favorites_goods_empty && index_page %}
 					<div class="sidebar__block" id="pdt__best" data-content="pdt__best">
@@ -567,13 +638,90 @@
 						</div>
 					</div>
 					{% ENDIF %}
+					
 					<!-- Промо -->
+					{% IF index_page %}
 					<div class="sidebar__block promo">
 						<div class="promo__image" style="background-image: url('{ASSETS_IMAGES_PATH}promo.png?design=THEMENAME');">
 							<div class="promo__title">Инструменты для ремонта здесь</div>
 							<a href="{CATALOG_URL}" class="promo__button button button2" title="Смотреть">Смотреть</a>
 						</div>
 					</div>
+					{% ENDIF %}
+					
+					<!-- Сравнение -->
+					{% IFNOT MOD_LNAME = compare && SETTINGS_COMPARE_DISABLE=0 %}
+					<div class="sidebar__block compare {% IF COMPARE_GOODS_COUNT > 0 %}hasItems{% ENDIF %}" data-content="viewed">
+						<div class="sidebar__title">
+							<a href="{COMPARE_URL}"><span>Сравнение</span></a>
+							<div class="nav__buttons"></div>
+						</div>
+						<div class="sidebar__content">
+							<div class="addto__compare" data-open="compare">
+								<div class="addto__items">
+									{% FOR compare_goods %}
+									<div class="addto__item" data-id="{compare_goods.ID}">
+										<a href="{compare_goods.URL}" title="{compare_goods.NAME}" class="addto__image"><img src="{% IF compare_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=THEMENAME{% ELSE %}{compare_goods.IMAGE_ICON}{% ENDIF %}" class="goods-image-icon" /></a>
+										<div class="addto__shop">
+											<!-- Название -->
+											<a href="{compare_goods.URL}" class="addto__name" title="{compare_goods.NAME}"><span>{compare_goods.NAME}</span></a>
+											<!-- Цена -->
+											<div class="addto__price {CURRENCY_CHAR_CODE}">
+												<div class="price__now">{compare_goods.MIN_PRICE_NOW | money_format}</div>
+												<!-- Удаление -->
+												<a href="{COMPARE_DELETE_URL}?id={compare_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{compare_goods.MIN_PRICE_NOW_ID}" class="addto__remove remove" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"><span>Удалить</span></a>
+											</div>
+										</div>
+									</div>
+									{% ENDFOR %}
+								</div>
+								<div class="addto__empty">
+									<div class="addto__title">Ваш список сравнения пуст</div>
+								</div>
+								<div class="addto__buttons">
+									<a href="{COMPARE_RESET_URL}" onclick="removeFromCompareAll($(this))" class="button button5 removeAll" title="Очистить список сравнения"><span>Очистить сравнение</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% ENDIF %}
+					
+					<!-- Избранное -->
+					<div class="sidebar__block favorites {% IF FAVORITES_GOODS_COUNT > 0 %}hasItems{% ENDIF %}" data-content="viewed">
+						<div class="sidebar__title">
+							<a href="{COMPARE_URL}"><span>Избранное</span></a>
+							<div class="nav__buttons"></div>
+						</div>
+						<div class="sidebar__content">
+							<div class="addto__favorites" data-open="favorites">
+								<div class="addto__title">В Избранном</div>
+								<div class="addto__items">
+									{% FOR favorites_goods %}
+									<div class="addto__item" data-id="{favorites_goods.ID}">
+										<a href="{favorites_goods.URL}" title="{favorites_goods.NAME}" class="addto__image"><img src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=THEMENAME{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" class="goods-image-icon" /></a>
+										<div class="addto__shop">
+											<!-- Название -->
+											<a href="{favorites_goods.URL}" class="addto__name" title="{favorites_goods.NAME}">{favorites_goods.NAME}</a>
+											<!-- Цена -->
+											<div class="addto__price {CURRENCY_CHAR_CODE}">
+												<div class="price__now">{favorites_goods.MIN_PRICE_NOW | money_format}</div>
+												<!-- Удаление -->
+												<a href="{FAVORITES_DELETE_URL}?id={favorites_goods.MIN_PRICE_NOW_ID}" data-goods-mod-id="{favorites_goods.MIN_PRICE_NOW_ID}" class="addto__remove remove" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"><span>Удалить</span></a>
+											</div>
+										</div>
+									</div>
+									{% ENDFOR %}
+								</div>
+								<div class="addto__empty">
+									<div class="addto__title">Ваш список избранного пуст</div>
+								</div>
+								<div class="addto__buttons">
+									<a href="{FAVORITES_RESET_URL}" onclick="removeFromFavoritesAll($(this))" class="button button5 removeAll" title="Очистить список Избранного"><span>Очистить Избранное</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<!-- Вы смотрели -->
 					{% IFNOT recently_viewed_goods_empty %}
 					<div class="sidebar__block viewed" data-content="viewed">
@@ -760,11 +908,12 @@
 									</form>
 								</div>
 								{% IFNOT recently_viewed_goods.last %}{recently_viewed_goods.index | is_divided("3","</div><div>","")}{% ENDIF %}
-								{% ENDFOR %}
-							</div>
+							{% ENDFOR %}
+						</div>
 						</div>
 					</div>
 					{% ENDIF %}
+					
 					<!-- Наш сервис -->
 					<div class="sidebar__block service">
 						<div class="sidebar__title">Наш сервис</div>
@@ -794,8 +943,10 @@
 							</div>
 						</div>
 					</div>
-				</div><!-- /END block__left -->
-				<div class="block__right">
+				</div>
+				<!-- /END block__left -->
+				
+				<div class="block__right {% IF MOD_LNAME = cart %}full{% ENDIF %}">
 					{% IF index_page %}
 					<!-- Слайдшоу -->
 					<div class="inner">
@@ -1034,6 +1185,7 @@
 						</div>
 						{% ENDIF %}
 					</div>
+					
 					<!-- Товары на главной. Новинки. -->
 					{% IFNOT index_page_favorites_goods_empty || index_page_new_goods_empty=0 %}
 					<section id="pdt">
@@ -1413,6 +1565,7 @@
 						{% ENDIF %}
 					</section>
 					{% ENDIF %}
+					
 					<!-- Категории -->
 					<section id="catalog">
 						<div class="block__title block__nav">
@@ -1435,7 +1588,7 @@
 						{% ENDFOR %}
 					</section>
 					
-					<!-- Категории каталога -->
+					<!-- Категории каталога с товарами на главной -->
 					{% IFNOT catalog_full_empty %}
 						<script>
 							var catalog_full = [];
@@ -1461,7 +1614,6 @@
 						{% ENDFOR %}
 					{% ENDIF %}
 					
-					
 					<!-- Описание главной страницы -->
 					<section id="main">
 						<div class="block__title block__nav">
@@ -1469,6 +1621,7 @@
 						</div>
 						<div>{BODY}</div>
 					</section>
+					
 					<!-- Новости -->
 					{% IF news_list_all_empty=0 || news_list_shop_empty=0 || news_list_articles_empty=0 || news_list_mass_media_empty=0 %}
 					<section id="news">
@@ -1570,20 +1723,25 @@
 						{% ENDIF %}
 					</section>
 					{% ENDIF %}
+					
 					<!-- Если НЕ ГЛАВНАЯ -->
 					{% ELSE index_page %}
+					
 					<!-- Описание страницы -->
 					<div id="main">
 						<div>{BODY}</div>
 					</div>
+					
 					{% ENDIF index_page %}
 				</div>
+				<!-- /END block__right -->
 			</div>
 		</div>
 	</section>
 	
 	<!-- Подвал -->
 	<footer id="footer">
+		<!-- Подвал. Верхняя часть -->
 		<div class="footer__top">
 			<div class="container">
 				<div class="inner">
@@ -1753,7 +1911,6 @@
 			</div>
 		</div>
 	</footer>
-	
 	
 	<!-- Модальные окна -->
 	<noindex>

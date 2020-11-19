@@ -769,38 +769,6 @@ function catalogpage() {
       $('#overlay').addClass('opened');
     }
   });
-  
-  // Вы смотрели
-  $('.recently__viewed .owl-carousel').owlCarousel({
-    items: 4,
-    margin: 20,
-    loop: false,
-    rewind: true,
-    lazyLoad: true,
-    nav: true,
-    navText: [ , ],
-    dots: false,
-    autoplay: false,
-    autoplayHoverPause: true,
-    autoHeight: true,
-    autoHeightClass: 'owl-height',
-    smartSpeed: 500,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    responsiveClass: true,
-    responsiveRefreshRate: 100,
-    responsive: {
-      0:{items:1},
-      320:{items:1, margin: 10},
-      481:{items:2, margin: 10},
-      641:{items:3, margin: 10},
-      768:{items:3, margin: 10},
-      992:{items:4},
-      1200:{items:4},
-      1400:{items:4}
-    }
-  });
 }
 
 // Фильтр по ценам
@@ -2963,7 +2931,7 @@ function pdtSlider() {
           }
           // Добавляем кнопку "Показать все"
           if(itemsLength > GOODS_INDEX){
-            buttons.append($('<button class="button button3 small"></button>'))
+            buttons.append($('<button class="button button3"></button>'))
             buttons.show();
           }else{
             buttons.hide();
