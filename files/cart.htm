@@ -24,7 +24,7 @@
 	                <input type="text" name="form[quantity][{cart_items.GOODS_MOD_ID}]" maxlength="4" value="{cart_items.ORDER_LINE_QUANTITY}" max="{cart_items.GOODS_MOD_REST_VALUE}" title="Количество, {cart_items.GOODS_MOD_MEASURE_NAME}" class="cartqty" onkeypress="return keyPress(this, event);" onpaste="return false;" autocomplete="off" />
 	                <a href="javascript:void(0)" class="qty__plus unselectable" title="Увеличить"><i class="icon-plus"></i></a>
 	              </div>
-	              <div class="cart__delete"><a data-href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="cartDelete($(this))" class="remove"><span>Удалить</span></a></div>
+	              <div class="cart__delete"><a data-href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="cartDelete($(this))" class="remove"><i class="icon-delete"></i><span>Удалить</span></a></div>
 	            </div>
 	          </div>
 	        </div>
@@ -65,11 +65,13 @@
 	        </div>
 	        <!-- Корзина: Оформление -->
 	        <div class="total__buttons">
-	          <a id="startOrder" class="button button2" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
+		        <a id="closeOrder" class="button button3" title="Отменить заказ"><span>Отменить </span><span>заказ</span></a>
+		        <a id="startOrder" class="button button2" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
 	          <noscript>
 	            <button type="submit" class="button button3" title="Пересчитать">Пересчитать</button>
 	            <button type="submit" class="button" name="next_step" title="Перейти к оформлению заказа в 4 шага"><span>Оформить </span><span>заказ</span></button>
 	          </noscript>
+		        <div class="total__pp">Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
 	        </div>
 	      </div>
 	    </div>

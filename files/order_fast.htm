@@ -7,6 +7,7 @@
   {% ELSE %}
   <div class="fastOrderForm">
     <form action="{ORDER_STAGE_CONFIRM_WITHOUT_DOMAIN_URL}" method="post" class="fastOrder__form" novalidate="novalidate">
+	    <div class="block__title"><div class="title">Оформление заказа</div></div>
       <!-- Данные покупателя -->
       <div class="account" order="1">
         <h3 class="title"><span>Личные данные</span></h3>
@@ -50,7 +51,7 @@
       </div>
       <!-- Адрес доставки-->
       {% IF SETTINGS_ORDER_FIELDS_COUNTRY < 3 || SETTINGS_ORDER_FIELDS_REGION < 3 || SETTINGS_ORDER_FIELDS_CITY < 3 || SETTINGS_ORDER_FIELDS_ADDRESS < 3 || SETTINGS_ORDER_FIELDS_ZIP_CODE < 3 || SETTINGS_ORDER_FIELDS_CONVENIENT_TIME < 3 || SETTINGS_ORDER_FIELDS_COMMENT < 3 %}
-      <div order="2" class="address {% IF SETTINGS_ORDER_FIELDS_COUNTRY = 1 || SETTINGS_ORDER_FIELDS_REGION = 1 || SETTINGS_ORDER_FIELDS_CITY = 1 || SETTINGS_ORDER_FIELDS_ADDRESS = 1 || SETTINGS_ORDER_FIELDS_ZIP_CODE = 1 || SETTINGS_ORDER_FIELDS_CONVENIENT_TIME = 1 || SETTINGS_ORDER_FIELDS_COMMENT = 1 %}hasRequired{% ENDIF %}"> 
+      <div class="address {% IF SETTINGS_ORDER_FIELDS_COUNTRY = 1 || SETTINGS_ORDER_FIELDS_REGION = 1 || SETTINGS_ORDER_FIELDS_CITY = 1 || SETTINGS_ORDER_FIELDS_ADDRESS = 1 || SETTINGS_ORDER_FIELDS_ZIP_CODE = 1 || SETTINGS_ORDER_FIELDS_CONVENIENT_TIME = 1 || SETTINGS_ORDER_FIELDS_COMMENT = 1 %}hasRequired{% ENDIF %}" order="2">
         <h3 class="title" title="Выберите удобный для вас Адрес доставки заказа"><span>Адрес доставки</span></h3>
         <div class="form__list">
           <!-- Если поле страны доставки запрашивается -->
@@ -148,7 +149,7 @@
             {% ENDIF %}
           {% ENDFOR %}
           <div class="delivery__descriptionBlock">
-            <div class="">
+            <div class="delivery__priceBlock">
               <span class="label">Стоимость доставки:</span>
               <span class="delivery__price changeprice"></span>
               <span class="currency">{CURRENCY_NAME}</span>
@@ -171,8 +172,8 @@
                 checked="checked"
               {% ENDIF %}
               />
-              <div class="delivery__desc">{order_delivery.DESC}</div>
-              <label for="deliveryId{order_delivery.ID}" class="delivery__name">{order_delivery.NAME}</label>
+	            <label for="deliveryId{order_delivery.ID}" class="delivery__name">{order_delivery.NAME}</label>
+	            {% IF order_delivery.DESC %}<div class="delivery__desc">{order_delivery.DESC}</div>{% ENDIF %}
               <div class="delivery__fields">
                 <label>Стоимость доставки:</label><span class="delivery__price">{order_delivery.END_PRICE | money_format}</span>
               </div>
@@ -194,7 +195,7 @@
                     {% ENDIF %}
                   />
                   <label class="zones__name" for="deliveryZoneId{order_delivery.zone_list.ID}">{order_delivery.zone_list.NAME}</label>
-                  <span class="zones__price">{order_delivery.zone_list.END_PRICE | money_format}</span>
+                  <div class="zones__price">{order_delivery.zone_list.END_PRICE | money_format}</div>
                 </div>
                 {% ENDFOR %}
               </div>
@@ -222,7 +223,9 @@
                   <div class="currentPaymentDescription"></div>
                 </div>
               </div>
-              <div class="payment__description"></div>
+              <div class="payment__descriptionBlock">
+	              <div class="payment__description"></div>
+              </div>
             </div>
           {% ENDIF %}
         {% ENDFOR %}
@@ -233,8 +236,8 @@
             <div class="order__payment" rel="{order_delivery.ID}" style="display: none;">
               {% FOR available_payment_list %}  
               <div class="payment__option">
+	              <input type="radio" id="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" name="form[payment][id]" deliveryid="{order_delivery.available_payment_list.ID}" value="{order_delivery.available_payment_list.ID}" class="paymentRadio square required" {% IFNOT ORDER_FORM_PAYMENT_ID %}{% IF order_delivery.available_payment_list.first %}checked="checked"{% ENDIF %}{% ELSEIF order_delivery.available_payment_list.ID = ORDER_FORM_PAYMENT_ID %}checked="checked"{% ENDIF %}/>
                 <label for="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" class="payment__name">{order_delivery.available_payment_list.NAME}</label>
-                <input type="radio" id="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" name="form[payment][id]" deliveryid="{order_delivery.available_payment_list.ID}" value="{order_delivery.available_payment_list.ID}" class="paymentRadio square required" {% IFNOT ORDER_FORM_PAYMENT_ID %}{% IF order_delivery.available_payment_list.first %}checked="checked"{% ENDIF %}{% ELSEIF order_delivery.available_payment_list.ID = ORDER_FORM_PAYMENT_ID %}checked="checked"{% ENDIF %}/>
                 <!-- Сообщение для пользователя -->
                 {% IF order_delivery.available_payment_list.MESSAGE %}
                   <div class="payment__desc">{order_delivery.available_payment_list.MESSAGE}</div>

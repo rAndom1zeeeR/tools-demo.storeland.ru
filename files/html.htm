@@ -65,7 +65,7 @@
 						<!-- Сравнение -->
 						{% IFNOT MOD_LNAME = compare && SETTINGS_COMPARE_DISABLE=0 %}
 						<div class="compare dropdown {% IF COMPARE_GOODS_COUNT > 0 %}hasItems{% ENDIF %}">
-							<a href="{COMPARE_URL}" class="addto__label dropdown__open compare__icon" title="Сравнение" data-open="compare">
+							<a href="{COMPARE_URL}" class="addto__label compare__icon" title="Сравнение" data-open="compare">
 								<i class="icon-compare"></i>
 								<span>Сравнение</span>
 								<span class="compare__count" data-count="{COMPARE_GOODS_COUNT}">{COMPARE_GOODS_COUNT}</span>
@@ -75,7 +75,7 @@
 						{% ENDIF %}
 						<!-- Избранное -->
 						<div class="favorites dropdown {% IF FAVORITES_GOODS_COUNT > 0 %}hasItems{% ENDIF %}">
-							<a href="{FAVORITES_URL}" class="addto__label dropdown__open favorites__icon" title="Избранное" data-open="favorites">
+							<a href="{FAVORITES_URL}" class="addto__label favorites__icon" title="Избранное" data-open="favorites">
 								<i class="icon-favorites"></i>
 								<span>Избранное</span>
 								<span class="favorites__count" data-count="{FAVORITES_GOODS_COUNT}">{FAVORITES_GOODS_COUNT}</span>
@@ -84,7 +84,7 @@
 						<span class="separator"></span>
 						<!-- Войти TODO нужна иконка входа -->
 						<div class="login dropdown">
-							<a href="{USER_LOGIN_URL}" class="addto__label dropdown__open login__icon" title="Личный кабинет" data-open="login">
+							<a href="{USER_LOGIN_URL}" class="addto__label login__icon" title="Личный кабинет" data-open="login">
 								<i class="icon-login"></i>
 								<span>Войти</span>
 							</a>
@@ -112,8 +112,8 @@
 											<input type="email" name="form[sites_client_mail]" value="{FORM_SITES_CLIENT_MAIL}" id="sites_client_mail"  maxlength="255" class="form__input email" placeholder="Email" required/>
 										</div>
 										<div class="form__fields">
-											<label for="sites_client_pass" class="required">Пароль: <em>*</em></label>
-											<input type="password" id="sites_client_pass" name="form[sites_client_pass]" value="{FORM_SITES_CLIENT_PASS}" maxlength="50" minlength="6" class="form__input" placeholder="Пароль" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" required/>
+											<label for="sites_client_pass1" class="required">Пароль: <em>*</em></label>
+											<input type="password" id="sites_client_pass1" name="form[sites_client_pass]" value="{FORM_SITES_CLIENT_PASS}" maxlength="50" minlength="6" class="form__input sites_client_pass" placeholder="Пароль" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" required/>
 											{% IFNOT user_agent_ie %}
 											<div class="showPassBlock"><a href="#" rel="Скрыть пароль" class="showPass">Показать пароль</a></div>
 											{% ENDIF %}
@@ -235,7 +235,7 @@
 							<div class="inner">
 								<div class="result__category"></div>
 								<div class="result__goods"></div>
-								<div class="result__showAll button button4">все результаты</div>
+								<div class="result__showAll"><a href="#" class="button button4">все результаты</a></div>
 							</div>
 						</div>
 					</div>
@@ -427,7 +427,7 @@
 				</div>
 				{% ENDIF %}
 				
-				<div class="block__left sidebar {% IF MOD_LNAME = cart %}hide{% ENDIF %}">
+				<div class="block__left sidebar {% IF MOD_LNAME = cart || MOD_LNAME = user || MOD_LNAME = order || MOD_LNAME = compare || MOD_LNAME = goods %}hide{% ENDIF %}">
 					<!-- Каталог -->
 					{% IFNOT MOD_LNAME = catalog %}
 					<div class="sidebar__block catalog">
@@ -946,7 +946,7 @@
 				</div>
 				<!-- /END block__left -->
 				
-				<div class="block__right {% IF MOD_LNAME = cart %}full{% ENDIF %}">
+				<div class="block__right {% IF MOD_LNAME = cart || MOD_LNAME = user || MOD_LNAME = order || MOD_LNAME = compare || MOD_LNAME = goods %}full{% ENDIF %}">
 					{% IF index_page %}
 					<!-- Слайдшоу -->
 					<div class="inner">
