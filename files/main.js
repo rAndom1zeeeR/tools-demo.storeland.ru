@@ -566,8 +566,8 @@ function goodspage() {
   });
   // Сопутствующие товары Слайдер
   $('.related__goods .owl-carousel').owlCarousel({
-    items: 4,
-    margin: 0,
+    items: 5,
+    margin: 32,
     loop: false,
     rewind: true,
     lazyLoad: true,
@@ -592,13 +592,15 @@ function goodspage() {
       641:{items:2},
       768:{items:3},
       992:{items:3},
-      1200:{items:4}
+      1200:{items:4},
+      1440:{items:5},
+      1600:{items:5}
     }
   });
   // С этим товаром смотрят Слайдер
   $('.related__views .owl-carousel').owlCarousel({
-    items: 4,
-    margin: 0,
+    items: 5,
+    margin: 32,
     loop: false,
     rewind: true,
     lazyLoad: true,
@@ -623,7 +625,9 @@ function goodspage() {
       641:{items:2},
       768:{items:3},
       992:{items:3},
-      1200:{items:4}
+      1200:{items:4},
+      1440:{items:5},
+      1600:{items:5}
     }
   });
   // Функция показать больше для Отзывов
