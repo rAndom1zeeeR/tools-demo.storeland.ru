@@ -86,7 +86,7 @@
 						<div class="login dropdown">
 							<a href="{USER_LOGIN_URL}" class="addto__label login__icon" title="Личный кабинет" data-open="login">
 								<i class="icon-login"></i>
-								<span>Войти</span>
+								<span>{% IF CLIENT_IS_LOGIN %}Личный кабинет{% ELSE %}Войти{% ENDIF %}</span>
 							</a>
 							<div id="addtoLogin" class="addto__login dropdown__content" data-open="login">
 								<div class="addto__title">Личный кабинет</div>
@@ -215,9 +215,22 @@
 						</div>
 					</div>
 					<!-- Меню -->
-					<div class="menu__icon button dropdown__open" data-open="menu">
-						<span>Меню</span>
-						<i class="icon-navigate_down"></i>
+					<div class="menu">
+						<div class="menu__icon button dropdown__open" data-open="menu">
+							<span>Меню</span>
+							<i class="icon-navigate_down"></i>
+						</div>
+						<div class="dropdown__content" data-open="menu">
+							<ul class="mainnav__list">
+								{% FOR menu %}
+								{% FOR header %}
+								{% FOR links %}
+								<li><a href="{menu.header.links.URL}" class="mainnav__link {% IF menu.header.links.SELECTED %}active{%ENDIF%}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}"><span>{menu.header.links.NAME}</span></a></li>
+								{% ENDFOR %}
+								{% ENDFOR %}
+								{% ENDFOR %}
+							</ul>
+						</div>
 					</div>
 					<!-- Поиск -->
 					<div class="search__icon"><i class="icon-notify"></i></div>
@@ -454,7 +467,6 @@
 							<span>Лидеры продаж</span>
 							<div class="owl-nav"></div>
 						</div>
-						<div class="preloader"><div class="loading"></div></div>
 						<div class="products__grid owl-carousel">
 							<div class="product__items">
 								{% FOR index_page_favorites_goods %}
@@ -649,6 +661,7 @@
 					</div>
 					{% ENDIF %}
 					
+					{% IFNOT index_page %}
 					<!-- Сравнение -->
 					{% IFNOT MOD_LNAME = compare && SETTINGS_COMPARE_DISABLE=0 %}
 					<div class="sidebar__block compare {% IF COMPARE_GOODS_COUNT > 0 %}hasItems{% ENDIF %}" data-content="viewed">
@@ -729,7 +742,6 @@
 							<span>Вы смотрели</span>
 							<div class="owl-nav"></div>
 						</div>
-						<div class="preloader"><div class="loading"></div></div>
 						<div class="products__grid owl-carousel">
 							<div class="product__items">
 								{% FOR recently_viewed_goods %}
@@ -914,6 +926,8 @@
 					</div>
 					{% ENDIF %}
 					
+					{% ENDIF index_page %}
+					
 					<!-- Наш сервис -->
 					<div class="sidebar__block service">
 						<div class="sidebar__title">Наш сервис</div>
@@ -950,7 +964,6 @@
 					{% IF index_page %}
 					<!-- Слайдшоу -->
 					<div class="inner">
-						<div class="preloader"><div class="loading"></div></div>
 						<div id="slideshow">
 							<!-- Слайдер -->
 							<div class="slider owl-carousel">
@@ -1202,7 +1215,6 @@
 						<!-- Товары на главной -->
 						{% IFNOT index_page_goods_empty %}
 						<div id="pdt__sale" data-content="pdt__sale" class="active">
-							<div class="preloader"><div class="loading"></div></div>
 							<div class="products__grid owl-carousel">
 								{% FOR index_page_goods %}
 								<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && index_page_goods.MAX_REST_VALUE=0 %}empty{% ENDIF %}" itemscope itemtype="https://schema.org/Product">
@@ -1384,7 +1396,6 @@
 						<!-- Новинки -->
 						{% IFNOT index_page_new_goods_empty %}
 						<div id="pdt__new" data-content="pdt__new" {% IF index_page_favorites_goods_empty || index_page_goods_empty %}class="active"{% ENDIF %}>
-							<div class="preloader"><div class="loading"></div></div>
 							<div class="products__grid owl-carousel">
 								{% FOR index_page_new_goods %}
 								<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && index_page_new_goods.MAX_REST_VALUE=0 %}empty{% ENDIF %}" itemscope itemtype="https://schema.org/Product">
@@ -1625,7 +1636,6 @@
 					<!-- Новости -->
 					{% IF news_list_all_empty=0 || news_list_shop_empty=0 || news_list_articles_empty=0 || news_list_mass_media_empty=0 %}
 					<section id="news">
-						<div class="preloader"><div class="loading"></div></div>
 						<div class="block__title block__nav">
 							<div class="nav__tabs">
 								{% IFNOT news_list_all_empty %}<a href="#" class="nav__tab title active" data-content="news_list_all">Новости</a>{% ENDIF %}
