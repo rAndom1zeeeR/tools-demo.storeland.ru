@@ -662,7 +662,7 @@ section {margin: 2rem 0;position: relative;}
 .payment__option label {width: calc(100% - 46px);display: inline-block;vertical-align: middle;}
 .payment__option {margin-bottom: 1rem;}
 .payment__desc {margin-top: 1rem;}
-.payment__description, .delivery__descriptionBlock {background: #fda800;padding: 2rem;}
+.payment__description, .delivery__descriptionBlock {background: #fda800;padding: 2rem;border-radius: 5px;}
 /* Самовывоз */
 .fastOrder__form.pickup [order="1"] {width: 100%;}
 .fastOrder__form.pickup [order="2"] {display: none;}
