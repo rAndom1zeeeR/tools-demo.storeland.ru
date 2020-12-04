@@ -29,6 +29,18 @@
 </div>
 
 <!-- Блок для обновления данных корзины. Не виден пользователю -->
+<div style="display:none;" id="newCartLabel">
+	<i class="icon-cart2"><span class="path1"></span><span class="path2"></span></i>
+	<div>
+		<div class="cart__title">В корзине</div>
+		<div class="cart__full {CURRENCY_CHAR_CODE}">
+			<span class="cart__count" data-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
+			<span class="cart__measure">товар{CART_COUNT_TOTAL| gen_word_end("","а","ов")} на </span>
+			<span class="cart__totalSum totalSum  price__now">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
+		</div>
+		<div class="cart__empty">Пусто</div>
+	</div>
+</div>
 <div style="display:none;" id="newCartCount">
   {CART_COUNT_TOTAL}
 </div>
@@ -37,7 +49,7 @@
 	<div class="addto__items">
 		{% FOR cart_items %}
 		<div class="addto__item" data-id="{cart_items.GOODS_ID}">
-			<a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="addto__image"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=nails{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon" /></a>
+			<a href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}" class="addto__image"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=THEMENAME{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" class="goods-image-icon" /></a>
 			<div class="addto__shop">
 				<!-- Название -->
 				<a href="{cart_items.GOODS_URL}" class="addto__name" title="{cart_items.GOODS_NAME}"><span>{cart_items.GOODS_NAME}</span></a>
@@ -45,19 +57,16 @@
 				<!-- Цена -->
 				<div class="addto__price {CURRENCY_CHAR_CODE}">
 					<div class="price__now" data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</div>
-					{% IF cart_items.GOODS_MOD_PRICE_OLD>cart_items.GOODS_MOD_PRICE_NOW %}
-					<div class="price__old" data-price="{cart_items.GOODS_MOD_PRICE_OLD}">{cart_items.GOODS_MOD_PRICE_OLD | money_format}</div>
-					{% ENDIF %}
+					<!-- Удаление -->
+					<a class="addto__remove remove" href="{cart_items.ORDER_LINE_DELETE_URL}" data-qty="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" onclick="removeFromCart($(this))"><span>Удалить</span></a>
 				</div>
-				<!-- Удаление -->
-				<a class="addto__remove remove" href="{cart_items.ORDER_LINE_DELETE_URL}" data-qty="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" onclick="removeFromCart($(this))"><span>Удалить</span></a>
 			</div>
 		</div>
 		{% ENDFOR %}
 	</div>
 	<div class="addto__total {CURRENCY_CHAR_CODE}">
 		<span>Итого:</span>
-		<span class="price__now">{CART_SUM_NOW}</span>
+		<span class="price__now">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
 	</div>
 	<div class="addto__empty">
 		<div class="addto__title">В корзине пока ничего нет</div>
@@ -73,4 +82,5 @@
 $('.cart__count').html($('#newCartCount').html());
 $('.cart__count').attr('data-count', $('#newCartCount').html());
 $('.addto__cart').html($('#newCartData').html());
+$('.cart__label').html($('#newCartLabel').html());
 </script>

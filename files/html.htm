@@ -85,52 +85,9 @@
 						<!-- Войти TODO нужна иконка входа -->
 						<div class="login dropdown">
 							<a href="{USER_LOGIN_URL}" class="addto__label login__icon" title="Личный кабинет" data-open="login">
-								<i class="icon-login"></i>
+								<i class="icon-user"></i>
 								<span>{% IF CLIENT_IS_LOGIN %}Личный кабинет{% ELSE %}Войти{% ENDIF %}</span>
 							</a>
-							<div id="addtoLogin" class="addto__login dropdown__content" data-open="login">
-								<div class="addto__title">Личный кабинет</div>
-								{% IF CLIENT_IS_LOGIN %}
-								<!-- ЛК для авторизованных пользователей -->
-								<div class="mainnav__links">
-									<a href="{USER_SETTINGS_URL}" title="Личный кабинет" rel="nofollow"><span>Мой кабинет</span></a>
-									<a href="{USER_HISTORY_LIST_URL}" title="История заказов" rel="nofollow"><span>История</span></a>
-									<a href="{FAVORITES_URL}" title="Избранные товары" rel="nofollow"><span>Избранное</span></a>
-									{% IF SETTINGS_COMPARE_DISABLE=0 %}<a href="{COMPARE_URL}" title="Сравнение" rel="nofollow">Сравнение</a>{% ENDIF %}
-									<a href="{USER_LOGOUT_URL}" title="Выход" rel="nofollow"><span>Выход</span></a>
-								</div>
-								{% ELSE %}
-								<!-- Форма входа и регистрации -->
-								<form action="{USER_LOGIN_URL}" method="post" class="form__client">
-									<input type="hidden" name="hash" value="{HASH}" />
-									<input type="hidden" name="from" value="{FROM}" />
-									<!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
-									{ANTISPAM_CODE}
-									<div class="form__list">
-										<div class="form__fields">
-											<label for="sites_client_mail" class="required">Электронная почта <em>*</em></label>
-											<input type="email" name="form[sites_client_mail]" value="{FORM_SITES_CLIENT_MAIL}" id="sites_client_mail"  maxlength="255" class="form__input email" placeholder="Email" required/>
-										</div>
-										<div class="form__fields">
-											<label for="sites_client_pass1" class="required">Пароль: <em>*</em></label>
-											<input type="password" id="sites_client_pass1" name="form[sites_client_pass]" value="{FORM_SITES_CLIENT_PASS}" maxlength="50" minlength="6" class="form__input sites_client_pass" placeholder="Пароль" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" required/>
-											{% IFNOT user_agent_ie %}
-											<div class="showPassBlock"><a href="#" rel="Скрыть пароль" class="showPass">Показать пароль</a></div>
-											{% ENDIF %}
-											<div id="capslock">
-												<div><i class="material-icons">warning</i></div>
-												<div><strong>Caps Lock включен.</strong></div>
-												<div>Пароль может быть введен неверно.</div>
-											</div>
-										</div>
-									</div>
-									<div class="client__buttons addto__buttons">
-										<button type="submit" name="send" class="button" title="Войти">Войти</button>
-										<a href="{USER_REGISTER_URL}" class="button button4">Зарегистрироваться</a>
-									</div>
-								</form>
-								{% ENDIF %}
-							</div>
 						</div>
 					</div>
 				</div>
@@ -150,7 +107,7 @@
 					</div>
 					<!-- Меню -->
 					<div class="header__menu">
-						<div class="menu__icon button dropdown__open" data-open="menu">
+						<div class="menu__icon button dropdown__open">
 							<span>Меню</span>
 							<i class="icon-navigate_down"></i>
 						</div>
@@ -233,9 +190,9 @@
 						</div>
 					</div>
 					<!-- Поиск -->
-					<div class="search__icon"><i class="icon-notify"></i></div>
 					<div class="search" itemscope itemtype="https://schema.org/WebSite">
 						<link itemprop="url" href="{INDEX_PAGE_URL}"/>
+						<div class="search__icon"><i class="icon-search"></i></div>
 						<form class="search__form" action="{QUICK_SEARCH_URL}" method="get" title="Поиск по магазину" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
 							<meta itemprop="target" content="{SEARCH_URL}?q={{EMPTY}q}" />
 							<input type="hidden" name="goods_search_field_id" value="0" />
@@ -254,19 +211,16 @@
 					</div>
 					<!-- Корзина -->
 					<div class="cart dropdown {% IF CART_COUNT_TOTAL > 0 %}hasItems{% ENDIF %}">
-						<a href="{CART_URL}" class="addto__label dropdown__open cart__icon" data-open="cart" title="Корзина">
+						<a href="{CART_URL}" class="addto__label dropdown__open cart__icon cart__label" data-open="cart" title="Корзина">
 							<i class="icon-cart2"><span class="path1"></span><span class="path2"></span></i>
 							<div>
 								<div class="cart__title">В корзине</div>
-								{% IF CART_COUNT_TOTAL > 0 %}
-								<div class="cart__full">
+								<div class="cart__full {CURRENCY_CHAR_CODE}">
 									<span class="cart__count" data-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
 									<span class="cart__measure">товар{CART_COUNT_TOTAL| gen_word_end("","а","ов")} на </span>
-									<span class="cart__totalSum totalSum">{CART_SUM_NOW_WITH_DISCOUNT | money_format }</span>
+									<span class="cart__totalSum totalSum  price__now">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
 								</div>
-								{% ELSE %}
 								<div class="cart__empty">Пусто</div>
-								{% ENDIF %}
 							</div>
 						</a>
 						<div id="addtoCart" class="addto__cart dropdown__content" data-open="cart">
@@ -292,7 +246,7 @@
 							</div>
 							<div class="addto__total {CURRENCY_CHAR_CODE}">
 								<span>Итого:</span>
-								<span class="price__now">{CART_SUM_NOW}</span>
+								<span class="price__now">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
 							</div>
 							{% ENDIF %}
 							<div class="addto__empty">
@@ -702,7 +656,7 @@
 					<!-- Избранное -->
 					<div class="sidebar__block favorites {% IF FAVORITES_GOODS_COUNT > 0 %}hasItems{% ENDIF %}" data-content="viewed">
 						<div class="sidebar__title">
-							<a href="{COMPARE_URL}"><span>Избранное</span></a>
+							<a href="{FAVORITES_URL}"><span>Избранное</span></a>
 							<div class="nav__buttons"></div>
 						</div>
 						<div class="sidebar__content">
@@ -910,11 +864,6 @@
 												<meta itemprop="availability" content="{% IF recently_viewed_goods.MAX_REST_VALUE>0 %}http://schema.org/InStock{% ELSE %}http://schema.org/OutOfStock{% ENDIF %}" />
 												<meta itemprop="priceValidUntil" content="{recently_viewed_goods.MAX_DISCOUNT_EXPIRED_AT | date("Y-m-d")}"/>
 												<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{recently_viewed_goods.MIN_PRICE_NOW}">{recently_viewed_goods.MIN_PRICE_NOW | money_format}</span>
-												{% IF recently_viewed_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>recently_viewed_goods.MIN_PRICE_NOW %}
-												<span class="price__old {CURRENCY_CHAR_CODE}">{recently_viewed_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
-												{% ELSEIF recently_viewed_goods.MIN_PRICE_OLD>recently_viewed_goods.MIN_PRICE_NOW %}
-												<span class="price__old {CURRENCY_CHAR_CODE}">{recently_viewed_goods.MIN_PRICE_OLD | money_format}</span>
-												{% ENDIF %}
 											</div>
 										</div>
 									</form>
@@ -1795,7 +1744,7 @@
 							<input class="form__input" type="hidden" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" value="Подписаться" placeholder="Ваше имя" autocomplete="off" />
 							<input class="form__input" type="hidden" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="Подписаться" placeholder="Ваш телефон" autocomplete="off" />
 							<div class="form__field">
-								<input class="form__input form__email" type="email" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_EMAIL}]" value="{FORM_CALLBACK_EMAIL}" placeholder="email@email.ru *" autocomplete="off"  />
+								<input class="form__input form__email required" type="email" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_EMAIL}]" value="{FORM_CALLBACK_EMAIL}" placeholder="email@email.ru *" autocomplete="off"  />
 								<button type="submit" title="Отправить" class="form__button button">Отправить</button>
 							</div>
 						</form>
@@ -1812,7 +1761,7 @@
 							<!-- Логотип -->
 							<div class="logo" itemscope itemtype="http://schema.org/Organization">
 								<a href="{INDEX_PAGE_URL}" title="{SETTINGS_STORE_NAME}" itemprop="url">
-									<img src="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME" alt="{SETTINGS_STORE_NAME}" itemprop="logo">
+									<img src="{ASSETS_IMAGES_PATH}logo-footer.png?design=THEMENAME" alt="{SETTINGS_STORE_NAME}" itemprop="logo">
 									<div class="title"><span>Магазин</span></div>
 									<meta itemprop="name" content="{SETTINGS_STORE_NAME}">
 									<span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><meta itemprop="addressLocality" content="{SETTINGS_STORE_REGION}" /></span>
@@ -1820,14 +1769,19 @@
 							</div>
 							<!-- Подвал. О нас -->
 							<div class="footer__text">Мы рады, что Вы воспользовались нашим сервисом, и надеемся, что он придется Вам по вкусу.</div>
-							<!-- Подвал. Соц Сети -->
-							<div class="social__links">
-								<a class="facebook" href="https://www.facebook.com/" title="FaceBook.com" target="_blank"><i class="icon-facebook" aria-hidden="true"></i><span>Facebook</span></a>
-								<a class="youtube" href="https://www.youtube.com/" title="youtube.com" target="_blank"><i class="icon-youtube" aria-hidden="true"></i><span>YouTube</span></a>
-								<a class="vk" href="https://vk.com/" title="VK.com" target="_blank"><i class="icon-vk"></i><span>Вконтакте</span></a>
-								<a class="twitter" href="https://twitter.com/" title="twitter.com" target="_blank"><i class="icon-twitter" aria-hidden="true"></i><span>Twitter</span></a>
-								<a class="instagram" href="https://instagram.com/" title="Instagram.com" target="_blank"><i class="icon-instagram"></i><span>Instagram</span></a>
-								<a style="display: none;" class="whatsup" href="https://instagram.com/" title="Instagram.com" target="_blank"><i class="icon-whatsapp"></i><span>whatsapp</span></a>
+							<!-- Подвал. Оплата -->
+							<div class="payments">
+								<a href="#" title="Способы оплаты">
+									<i class="icon-mastercard"></i>
+									<i class="icon-mir"></i>
+									<i class="icon-qiwi"></i>
+									<i class="icon-sber"></i>
+									<i class="icon-visa"></i>
+									<i class="icon-walletone"></i>
+									<i class="icon-webmoney"></i>
+									<i class="icon-yandex"></i>
+									<i class="icon-yandexmoney"></i>
+								</a>
 							</div>
 						</div>
 						<div class="footer__block">
@@ -1901,6 +1855,19 @@
 									</a>
 									{% ENDIF %}
 									<meta itemprop="name" content="{SETTINGS_STORE_ORG_NAME}"/>
+								</div><!-- Подвал. Соц Сети -->
+								<!-- Подвал. Соц Сети -->
+								<div class="social__links">
+									<a class="facebook" href="https://www.facebook.com/" title="FaceBook.com" target="_blank"><i class="icon-facebook" aria-hidden="true"></i><span>Facebook</span></a>
+									<a class="youtube" href="https://www.youtube.com/" title="youtube.com" target="_blank"><i class="icon-youtube" aria-hidden="true"></i><span>YouTube</span></a>
+									<a class="vk" href="https://vk.com/" title="VK.com" target="_blank"><i class="icon-vk"></i><span>Вконтакте</span></a>
+									<a class="twitter" href="https://twitter.com/" title="twitter.com" target="_blank"><i class="icon-twitter" aria-hidden="true"></i><span>Twitter</span></a>
+									<a class="instagram" href="https://instagram.com/" title="Instagram.com" target="_blank"><i class="icon-instagram"></i><span>Instagram</span></a>
+									<a class="whatsup" href="https://instagram.com/" title="Instagram.com" target="_blank"><i class="icon-whatsapp"></i><span>whatsapp</span></a>
+									<a class="tiktok" href="https://www.tiktok.com/" title="tiktok.com" target="_blank"><i class="icon-tiktok" aria-hidden="true"></i><span>tiktok</span></a>
+									<a class="telegram" href="https://www.telegram.com/" title="telegram.com" target="_blank"><i class="icon-telegram" aria-hidden="true"></i><span>telegram</span></a>
+									<a class="odnoklassniki" href="https://www.ok.ru/" title="ok.ru" target="_blank"><i class="icon-odnoklassniki" aria-hidden="true"></i><span>Facebook</span></a>
+									<a class="viber" href="https://viber.com/" title="viber.com" target="_blank"><i class="icon-viber" aria-hidden="true"></i><span>viber</span></a>
 								</div>
 							</div>
 						</div>
@@ -1964,17 +1931,14 @@
 					<input class="callbackredirect" type="hidden" name="return_to" value="{CALLBACK_URL}"/>
 					<!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
 					{ANTISPAM_CODE}
-					<div class="form__fields">
-						<div class="form__field">
-							<i class="icon-user"></i>
-							<input id="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" class="form__input form__person" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" value="{FORM_CALLBACK_PERSON}" placeholder="Владимир П." autocomplete="off"/>
-						</div>
-						<div class="form__field">
-							<input id="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" class="form__input form__phone" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}" placeholder="+7 (987) 654-3210" autocomplete="off"/>
-						</div>
+					<div class="form__field">
+						<input id="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" class="form__input form__person" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" value="{FORM_CALLBACK_PERSON}" placeholder="Владимир П." autocomplete="off"/>
+					</div>
+					<div class="form__field">
+						<input id="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" class="form__input form__phone" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}" placeholder="+7 (987) 654-3210" autocomplete="off"/>
 					</div>
 					<div class="form__buttons">
-						<button type="submit" title=">Заказать звонок" class="form__button button">Заказать звонок</button>
+						<button type="submit" title=">Заказать звонок" class="form__button button button2">Заказать звонок</button>
 					</div>
 					<div class="form__pp">Нажимая на кнопку &laquo;Заказать звонок&raquo;, Вы соглашаетесь с
 						<a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
@@ -2004,7 +1968,7 @@
 						<textarea class="textarea callback__comment" rows="3" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_COMMENT}]" placeholder="Текст запроса">{FORM_CALLBACK_COMMENT}</textarea>
 					</div>
 					<div class="form__buttons">
-						<button type="submit" title=">Заказать звонок" class="form__button button">Отправить</button>
+						<button type="submit" title=">Заказать звонок" class="form__button button button2">Отправить</button>
 					</div>
 					<div class="form__pp">Нажимая на кнопку &laquo;Заказать звонок&raquo;, Вы соглашаетесь с
 						<a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
@@ -2036,12 +2000,11 @@
 					<!-- Для использования почты для уведомлений необходимо удалить ниже style="display: none;" -->
 					<div class="form__fields" style="display: none;">
 						<div class="form__field">
-							<i class="icon-mail"></i>
 							<input class="form__input form__email" type="email" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_EMAIL}]" value="{FORM_CALLBACK_EMAIL}" placeholder="email@email.ru *" autocomplete="off"/>
 						</div>
 					</div>
 					<div class="form__buttons">
-						<button type="submit" title="Уведомить" class="form__button button">Уведомить</button>
+						<button type="submit" title="Уведомить" class="form__button button button2">Уведомить</button>
 					</div>
 					<div class="form__pp">Нажимая на кнопку &laquo;Уведомить&raquo;, Вы соглашаетесь с
 						<a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>

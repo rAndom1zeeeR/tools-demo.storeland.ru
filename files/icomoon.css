@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?rl97zq');
-  src:  url('fonts/icomoon.eot?rl97zq#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?rl97zq') format('truetype'),
-    url('fonts/icomoon.woff?rl97zq') format('woff'),
-    url('fonts/icomoon.svg?rl97zq#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?lmpwzd');
+  src:  url('fonts/icomoon.eot?lmpwzd#iefix') format('embedded-opentype'),
+  url('fonts/icomoon.ttf?lmpwzd') format('truetype'),
+  url('fonts/icomoon.woff?lmpwzd') format('woff'),
+  url('fonts/icomoon.svg?lmpwzd#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,81 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-mastercard:before {
+  content: "\e932";
+}
+.icon-mir:before {
+  content: "\e933";
+}
+.icon-odnoklassniki:before {
+  content: "\e934";
+}
+.icon-qiwi:before {
+  content: "\e935";
+}
+.icon-sber:before {
+  content: "\e936";
+}
+.icon-telegram:before {
+  content: "\e937";
+}
+.icon-tiktok:before {
+  content: "\e938";
+}
+.icon-viber:before {
+  content: "\e939";
+}
+.icon-visa:before {
+  content: "\e93a";
+}
+.icon-walletone:before {
+  content: "\e93b";
+}
+.icon-webmoney:before {
+  content: "\e93d";
+}
+.icon-whatsapp:before {
+  content: "\e93e";
+}
+.icon-yandex:before {
+  content: "\e93f";
+}
+.icon-yandexmoney:before {
+  content: "\e940";
+}
+.icon-plus:before {
+  content: "\e927";
+}
+.icon-cancel:before {
+  content: "\e928";
+}
+.icon-check:before {
+  content: "\e929";
+}
+.icon-arrow-down:before {
+  content: "\e92a";
+}
+.icon-home:before {
+  content: "\e92b";
+}
+.icon-minus:before {
+  content: "\e92c";
+}
+.icon-send:before {
+  content: "\e92d";
+}
+.icon-skype:before {
+  content: "\e92e";
+}
+.icon-arrow-up:before {
+  content: "\e92f";
+}
+.icon-user:before {
+  content: "\e930";
+}
+.icon-search:before {
+  content: "\e931";
+}
 .icon-arrow-left:before {
   content: "\e900";
 }

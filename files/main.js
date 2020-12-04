@@ -1232,7 +1232,7 @@ $('.productView__form, .goodsListForm').off('submit').submit(function() {
           // Сообщение с ошибкой
           if(typeof(Noty) == "function") {
             new Noty({
-              text: '<div class="noty__addto"><i class="icon-warning"></i><div class="noty__message">'+ $(data).html() + '</div></div>',
+              text: '<div class="noty__addto"><i class="icon-cancel"></i><div class="noty__message">'+ $(data).html() + '</div></div>',
               layout:"bottomCenter",
               type:"warning",
               theme:"",
@@ -1445,7 +1445,7 @@ $('.add-compare').off('click').click(function(){
           // Если есть функция, которая отображает сообщения пользователю
           if(typeof(Noty) == "function") {
             new Noty({
-              text: '<div class="noty__addto"><i class="icon-warning"></i><div class="noty__message">'+ data.message + '</div></div>',
+              text: '<div class="noty__addto"><i class="icon-cancel"></i><div class="noty__message">'+ data.message + '</div></div>',
               layout:"bottomCenter",
               type:"warning",
               theme:"",
@@ -1626,7 +1626,7 @@ $('.add-favorites').off('click').click(function(){
           // Если есть функция, которая отображает сообщения пользователю
           if(typeof(Noty) == "function") {
             new Noty({
-              text: '<div class="noty__addto"><i class="icon-warning"></i><div class="noty__message">'+ data.message + '</div></div>',
+              text: '<div class="noty__addto"><i class="icon-cancel"></i><div class="noty__message">'+ data.message + '</div></div>',
               layout:"bottomCenter",
               type:"warning",
               theme:"",
@@ -1661,7 +1661,7 @@ $('.add-favorites').off('click').click(function(){
 function removeFromFavorites(e){
   event.preventDefault();
   if(confirm('Вы точно хотите удалить товар из Избранного?')){
-    e.parent().parent().fadeOut().remove();
+    e.parent().parent().parent().fadeOut().remove();
     let href = e.attr('href');
     let oldCount = $('.favorites__count').attr('data-count');
     let goodsModId = e.attr('data-goods-mod-id');
@@ -1721,7 +1721,7 @@ function removeFromFavoritesAll(e){
 function removeFromCompare(e){
   event.preventDefault();
   if(confirm('Вы точно хотите удалить товар из сравнения?')){
-    e.parent().parent().fadeOut().remove();
+    e.parent().parent().parent().fadeOut().remove();
     let href = e.attr('href');
     let oldCount = $('.compare__count').attr('data-count');
     let goodsModId = e.attr('data-goods-mod-id');
@@ -1960,7 +1960,6 @@ $(function(){
   $('#fancybox__notify .form__callback').submit(validSubmitNotify);
 });
 
-
 // Валидаторы для Имени и телефона в "Служба поддержки" на главной
 function validNameFeedback(){
   let name = $('#fancybox__feedback').find('.form__person');
@@ -2000,6 +1999,50 @@ function validSubmitFeedback(){
 // Проверка отправки формы
 $(function(){
   $('#fancybox__feedback .form__callback').submit(validSubmitFeedback);
+});
+
+// Валидаторы для телефона в "Уведомить" в карточке товара
+function validPhoneSubscribe(){
+  let tel = $('#subscribe').find('.form__phone');
+  let check = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{5,10}$/.test(tel.val());
+  if(check == true && check != ''){
+    tel.removeClass('error');
+    tel.parent().removeClass('error');
+    tel.attr('placeholder','Введите номер');
+    return true;
+  }
+  else{
+    tel.addClass('error');
+    tel.parent().addClass('error');
+    tel.attr('placeholder','Вы не ввели номер');
+    return false;
+  }
+}
+// Подписаться. Валидатор почты в "Подписаться"
+function validEmailSubscribe(){
+  let email = $('#subscribe').find('.form__email');
+  let check = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email.val());
+  if(check == true && check != ''){
+    email.removeClass('error');
+    email.parent().removeClass('error');
+    email.attr('placeholder','Введите Email');
+    return true;
+  }else{
+    email.addClass('error');
+    email.parent().addClass('error');
+    email.val('');
+    email.attr('placeholder','Вы ввели неверный Email');
+    return false;
+  }
+}
+function validSubmitSubscribe(){
+  let email = validEmailSubscribe();
+  let phone = validPhoneSubscribe();
+  return email || phone;
+}
+// Проверка отправки формы
+$(function(){
+  $('#subscribe .form__callback').submit(validSubmitSubscribe);
 });
 
 // Функция Быстрого просмотра товара
@@ -2555,6 +2598,7 @@ function startOrder(){
   let globalOrder = $('#globalOrder');
   let cartTable = $('.cartTable');
   let closeOrder = $('#closeOrder');
+  let startOrder = $('#startOrder');
   //объект блока куда будет выводиться форма быстрого заказа
   let OrderAjaxBlock = $('#OrderAjaxBlock');
   let urlQuickForm = '/cart/add'; // адрес страницы с формой
@@ -2566,6 +2610,7 @@ function startOrder(){
   cartTable.addClass('disable');
   globalOrder.show('slow');
   closeOrder.show();
+  startOrder.hide();
   $.ajax({
     type: "POST",
     cache: false,
@@ -2585,6 +2630,7 @@ function startOrder(){
         cartTable.removeClass('disable');
         globalOrder.hide();
         closeOrder.hide();
+        startOrder.show();
         $('html, body').delay(400).animate({scrollTop : jQuery('#main').offset().top}, 800);
         return false;
       });
@@ -2623,12 +2669,12 @@ function startOrder(){
 
 // Отправка купона при оформлении заказа
 function coupons() {
-  let submitBtn = $('.coupon__button');
-  let cuponInput = $('#coupon__code');
-  let resetBtn = $('.coupon__reset');
+  var submitBtn = $('.coupon__button');
+  var couponInput = $('#coupon__code');
+  var resetBtn = $('.coupon__reset');
   submitBtn.on('click', function(){
     let url = '/order/stage/confirm';
-    let val = cuponInput.val();
+    let val = couponInput.val();
     // Получаем данные формы, которые будем отправлять на сервер
     let formData = $('#myform').serializeArray();
     formData.push({name: 'ajax_q', value: 1});
@@ -2662,14 +2708,14 @@ function coupons() {
         $('.cartSumTotalHide').attr('data-value', newTotalSum);
         $('.cartSumTotalHide .num').text(newTotalSum);
         if (newTotalSum >= cartSum) {
-          cuponInput.parent().addClass('error');
-          cuponInput.parent().removeClass('active');
-          cuponInput.val("").attr("placeholder", "Купон неверен");
+          couponInput.parent().addClass('error');
+          couponInput.parent().removeClass('active');
+          couponInput.val("").attr("placeholder", "Купон неверен");
           $('.total__coupons').hide();
           $('.total__discount').show();
         } else {
-          cuponInput.parent().removeClass('error');
-          cuponInput.parent().addClass('active');
+          couponInput.parent().removeClass('error');
+          couponInput.parent().addClass('active');
           $('.total__coupons').show();
         }
       },
@@ -2684,13 +2730,13 @@ function coupons() {
     setTimeout(function(){
       $('.total__coupons').hide();
       $('.total__discount').show();
-      cuponInput.parent().removeClass('error');
-      cuponInput.parent().removeClass('active');
-      cuponInput.val("").attr("placeholder", "Введите купон");
+      couponInput.parent().removeClass('error');
+      couponInput.parent().removeClass('active');
+      couponInput.val("").attr("placeholder", "Введите купон");
     }, 500);
   });
   // Отображение кнопки Сброс
-  cuponInput.on('input',function(){
+  couponInput.on('input',function(){
     if($(this).val()) {
       $(this).parent().find('.coupon__reset').addClass('active')
     } else {
@@ -3264,6 +3310,11 @@ function OpenMenu() {
       $(this).closest('.parent').addClass('opened');
       $(this).closest('.open').addClass('opened');
     }
+  });
+
+  $('.subscribe').on('click', function(event){
+    event.preventDefault();
+    $('#subscribe .form__button').click();
   });
 }
 
