@@ -2333,7 +2333,7 @@ function OrderScripts() {
     }
   });
   // Отображение вариантов оплаты
-  let ID = $('input[name="form[delivery][id]"]:checked').val();
+  var ID = $('input[name="form[delivery][id]"]:checked').val();
   $('.order__payment').hide();
   $('.order__payment[rel="' + ID + '"]').show();
   $('.order__payment[rel="' + ID + '"]').find('input:first').click();
@@ -2698,7 +2698,7 @@ function coupons() {
         $('.total__coupons').show();
         // Получаем новую итоговую стоимость заказа
         let totalSum = totalBlock.find('.total-sum').data('total-sum');
-        let deliveryPrice = parseInt($('.delivery__price.changeprice').text());
+        let deliveryPrice = parseInt($('.cartSumDelivery .num').text());
         let newTotalSum = totalSum + deliveryPrice;
         let cartSum = $('.cartSumTotal').data('value');
         // Обновляем значение итоговой стоимости
@@ -2730,6 +2730,12 @@ function coupons() {
     setTimeout(function(){
       $('.total__coupons').hide();
       $('.total__discount').show();
+      let cartSum = $('.cartSum').data('value');
+      $('.cartSumTotal .num').text(cartSum);
+      $('.cartSumTotal').attr('data-value', cartSum);
+      $('.cartSumCoupons').attr('data-value', cartSum);
+      $('.cartSumTotalHide').attr('data-value', cartSum);
+      $('.cartSumTotalHide .num').text(cartSum);
       couponInput.parent().removeClass('error');
       couponInput.parent().removeClass('active');
       couponInput.val("").attr("placeholder", "Введите купон");
@@ -2744,7 +2750,6 @@ function coupons() {
     }
   });
 }
-
 
 // Функция показать больше для Каталога на главной странице
 function pdtCatalog() {

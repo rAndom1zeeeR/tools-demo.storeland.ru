@@ -134,7 +134,7 @@
 	          <div class="delivery__select selectBox form__fields">
 	            <select class="form__input">
 	              {% FOR order_delivery %}
-	                <option id="deliveryId{order_delivery.ID}" delId="{order_delivery.ID}" name="form[delivery][id]" value="{order_delivery.ID}">{order_delivery.NAME}</option>
+	                <option delId="{order_delivery.ID}" name="form[delivery][id]" value="{order_delivery.ID}">{order_delivery.NAME}</option>
 	              {% ENDFOR %}
 	            </select>
 	          </div>
@@ -143,7 +143,7 @@
 	            <div class="delivery__zoneSelect selectBox form__fields" del="{order_delivery.ID}">
 	              <select class="form__input">
 	                {% FOR zone_list %}
-	                  <option deliveryid="{order_delivery.ID}" id="deliveryZoneId{order_delivery.zone_list.ID}" name="form[delivery][zone_id]" value="{order_delivery.zone_list.ID}">{order_delivery.zone_list.NAME}</option>
+	                  <option deliveryid="{order_delivery.ID}" name="form[delivery][zone_id]" value="{order_delivery.zone_list.ID}">{order_delivery.zone_list.NAME}</option>
 	                {% ENDFOR %}
 	              </select>
 	            </div>
@@ -253,7 +253,7 @@
 	        <h3 class="title"><span>Код купона на скидку</span></h3>
 	        <div class="form__fields coupon__order">
 	          <input type="hidden" name="oldPromoDiscount" value="0">
-	          <input type="hidden" name="orderSumDefaul" value="{CART_SUM_NOW}">
+	          <input type="hidden" name="orderSumDefault" value="{CART_SUM_NOW}">
 	          <input type="text" id="coupon__code" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" class="form__input" placeholder="Введите код"/>
 	          <a href="javascript:void(0)" class="coupon__button" title="Применить"></a>
 	          <a href="javascript:void(0)" class="coupon__reset" title="Сбросить"></a>
