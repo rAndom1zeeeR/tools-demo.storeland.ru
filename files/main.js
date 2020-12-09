@@ -289,11 +289,11 @@ $(function() {
             data.goods[i].image_icon = data.goods[i].image_icon;
           }
           // Отображаем результат поиска
-          if(i <= 3){
+          if(i <= 2){
             $("#search__result .result__goods").append('<div class="result__item" data-id="'+ data.goods[i].goods_id +'"><a href="'+ data.goods[i].url +'"><div class="result__image"><img src="'+ data.goods[i].image_icon +'" class="goods-image-icon" /></div><div class="result__name"><span>'+ data.goods[i].goods_name +'</span></div></a></div>');
           }
           // Если последняя итерация цикла вставим кнопку "показать все"
-          if(i > 3){
+          if(i > 2){
             $('.result__showAll').show();
           }
         }
@@ -587,7 +587,7 @@ function goodspage() {
     responsiveRefreshRate: 100,
     responsive: {
       0:{items:1},
-      320:{items:1},
+      320:{items:2},
       481:{items:2},
       641:{items:2},
       768:{items:3},
@@ -620,7 +620,7 @@ function goodspage() {
     responsiveRefreshRate: 100,
     responsive: {
       0:{items:1},
-      320:{items:1},
+      320:{items:2},
       481:{items:2},
       641:{items:2},
       768:{items:3},
@@ -717,8 +717,9 @@ function goodspage() {
 // Товары. Категории
 function catalogpage() {
   // Фильтры по товарам. При нажании на какую либо характеристику или свойство товара происходит фильтрация товаров
-  $('.filter__item input').click(function(){
-    $(this)[0].form.submit();
+  $('.filter__item select').change(function(){
+    $(this).attr('name', $(this).find('option:selected').attr('value') == -1 ? '' : $(this).find('option:selected').attr('rel'));
+    this.form.submit();
   });
   
   // Открытие сортировки и показать по
@@ -789,8 +790,8 @@ function priceFilter() {
   function priceInputsChangeWidthByChars() {
     // Если есть блок указания минимальной цены
     if(priceInputMin.length) {
-      priceInputMin.css('width', (priceInputMin.val().length*7 + 20) + 'px');
-      priceInputMax.css('width', (priceInputMax.val().length*7 + 20) + 'px');
+      priceInputMin.css('width', (priceInputMin.val().length*7 + 30) + 'px');
+      priceInputMax.css('width', (priceInputMax.val().length*7 + 30) + 'px');
     }
   }
   
@@ -2367,7 +2368,7 @@ function OrderScripts() {
       $('.cartSumDelivery .num').text(price);
     }
     // Обновление цены с учетом доставки
-    let cartSumTotalHide = $('.cartSumTotalHide:eq(0) .num').text().toString().replace(/\s/g, '');
+    let cartSumTotalHide = $('.cartSumDiscount:eq(0) .num').text().toString().replace(/\s/g, '');
     let newSum = parseInt(cartSumTotalHide) + parseInt(priceBlock.text());
     $('.cartSumTotal .num').text(newSum);
     // Скрытие необязательных полей при выборе самовывоза
@@ -2382,6 +2383,17 @@ function OrderScripts() {
       $('.address input, .address textarea').val('');
       $('#deliveryConvenientDate').val('');
     }
+
+
+    console.log('ID', ID)
+    console.log('val', val)
+    console.log('fz', fz)
+    console.log('price', price)
+    console.log('priceBlock', priceBlock)
+    console.log('cartSumTotal', cartSumTotal)
+    console.log('zonePrice', zonePrice)
+    console.log('cartSumTotalHide', cartSumTotalHide)
+    console.log('newSum', newSum)
   });
   
   // Действия при выборе зоны внутри варианта доставки на этапе оформления заказа
@@ -2430,6 +2442,7 @@ function OrderScriptsSelect() {
       startprice = WithoutZone;
     }
     $('.changeprice').text(startprice);
+    $('.cartSumDelivery .num').text(startprice);
     $('.order__payment').hide();
     $('.order__payment[rel="'+ selectedDelId +'"]').show();
     let startInputId = $('.delivery__radio:checked').attr('value');
@@ -2473,6 +2486,7 @@ function OrderScriptsSelect() {
       startprice = WithoutZone;
     }
     $('.changeprice').text(startprice);
+    $('.cartSumDelivery .num').text(startprice);
     $('.order__payment').hide();
     $('.order__payment[rel="'+ selectedDelId +'"]').show();
     let startInputId = $('.delivery__radio:checked').attr('value');
@@ -2506,6 +2520,7 @@ function OrderScriptsSelect() {
     $('.delivery__zones input[value="'+optValue+'"]').click();
     let WithZone = $('.zone__radio:checked').attr('price');
     $('.changeprice').text(WithZone);
+    $('.cartSumDelivery .num').text(startprice);
   });
   
   // Выбор зоны доставки
@@ -2514,6 +2529,7 @@ function OrderScriptsSelect() {
     $('.delivery__zones input[value="'+optValue+'"]').click();
     let WithZone = $('.zone__radio:checked').attr('price');
     $('.changeprice').text(WithZone);
+    $('.cartSumDelivery .num').text(startprice);
   });
   
   // Выбор оплаты
@@ -2701,13 +2717,7 @@ function coupons() {
         let deliveryPrice = parseInt($('.cartSumDelivery .num').text());
         let newTotalSum = totalSum + deliveryPrice;
         let cartSum = $('.cartSumTotal').data('value');
-        // Обновляем значение итоговой стоимости
-        $('.cartSumTotal .num').text(newTotalSum);
-        $('.cartSumTotal').attr('data-value', newTotalSum);
-        $('.cartSumCoupons').attr('data-value', newTotalSum);
-        $('.cartSumTotalHide').attr('data-value', newTotalSum);
-        $('.cartSumTotalHide .num').text(newTotalSum);
-        if (newTotalSum >= cartSum) {
+        if (totalSum > cartSum) {
           couponInput.parent().addClass('error');
           couponInput.parent().removeClass('active');
           couponInput.val("").attr("placeholder", "Купон неверен");
@@ -2717,7 +2727,25 @@ function coupons() {
           couponInput.parent().removeClass('error');
           couponInput.parent().addClass('active');
           $('.total__coupons').show();
+          // Обновляем значение итоговой стоимости
+          $('.cartSumTotal .num').text(newTotalSum);
+          $('.cartSumTotal').attr('data-value', newTotalSum);
+          $('.cartSumCoupons').attr('data-value', newTotalSum);
+          $('.cartSumTotalHide').attr('data-value', newTotalSum);
+          $('.cartSumTotalHide .num').text(newTotalSum);
+          $('.cartSumDiscount .num').text(totalSum);
         }
+
+        /*console.log('oldQuickPrice', oldQuickPrice)
+        console.log('discountBlock', discountBlock)
+        console.log('discountName', discountName)
+        console.log('discountPercent', discountPercent)
+        console.log('totalBlock', totalBlock)
+        console.log('totalSum', totalSum)
+        console.log('deliveryPrice', deliveryPrice)
+        console.log('newTotalSum', newTotalSum)
+        console.log('cartSum', cartSum)*/
+
       },
       error: function(data){
         console.log("Возникла ошибка: Невозможно отправить форму купона.");
@@ -2730,7 +2758,7 @@ function coupons() {
     setTimeout(function(){
       $('.total__coupons').hide();
       $('.total__discount').show();
-      let cartSum = $('.cartSum').data('value');
+      let cartSum = $('.cartSumDiscount .num').data('value');
       $('.cartSumTotal .num').text(cartSum);
       $('.cartSumTotal').attr('data-value', cartSum);
       $('.cartSumCoupons').attr('data-value', cartSum);
@@ -2778,41 +2806,6 @@ function pdtCatalog() {
       320:{items:1},
       481:{items:1},
       991:{items:2, margin: 16}
-    }
-  });
-}
-
-// Функция показать больше для Акции на главной странице
-function pdtBrands() {
-  $('#brands .owl-carousel').owlCarousel({
-    items: 8,
-    margin: 32,
-    loop: false,
-    rewind: true,
-    lazyLoad: true,
-    nav: false,
-    navContainer: '',
-    navText: [ , ],
-    dots: false,
-    autoHeight: false,
-    autoHeightClass: 'owl-height',
-    autoplay: true,
-    autoplayHoverPause: true,
-    smartSpeed: 500,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    responsiveClass: true,
-    responsiveRefreshRate: 100,
-    responsive: {
-      0:{items:1},
-      320:{items:2},
-      481:{items:2},
-      641:{items:3},
-      768:{items:3},
-      992:{items:4},
-      1200:{items:6},
-      1440:{items:8}
     }
   });
 }
@@ -2906,7 +2899,7 @@ function pdtSlider() {
     responsiveRefreshRate: 100,
     responsive: {
       0:{items:1},
-      320:{items:1},
+      320:{items:2},
       481:{items:2},
       641:{items:3},
       768:{items:3},
@@ -2940,7 +2933,7 @@ function pdtSlider() {
     responsiveRefreshRate: 100,
     responsive: {
       0:{items:1},
-      320:{items:1},
+      320:{items:2},
       481:{items:2},
       641:{items:3},
       768:{items:3},
@@ -3036,7 +3029,7 @@ function slideShow() {
     items: 1,
     loop: true,
     rewind: true,
-    lazyLoad: true,
+    lazyLoad: false,
     nav: true,
     navText: [ , ],
     navContainer: '',
@@ -3159,7 +3152,7 @@ function newsCarousel() {
       onChanged: carouselInitialized
     });
     $("#news .news_list_shop.owl-carousel").owlCarousel({
-      items: 4,
+      items: 3,
       margin: 32,
       loop: false,
       rewind: true,
@@ -3186,7 +3179,7 @@ function newsCarousel() {
         768:{items:3},
         992:{items:3},
         1200:{items:3},
-        1680:{items:4}
+        1680:{items:3}
       },
       onInitialize: carouselInitialized,
       onInitialized: carouselInitialized,

@@ -89,7 +89,7 @@
 			    <!-- Блок информации по акции действующей на товар, если таковая есть -->
 		    {% IF GOODS_MOD_MAX_DISCOUNT_ID %}
 		    <div class="productView__campaign">
-			    <div class="button">Скидка {GOODS_MOD_MAX_DISCOUNT}% до <span class="date">{GOODS_MOD_MAX_DISCOUNT_EXPIRED_AT | date("d.m.Y")}</span></div>
+			    <div>Скидка {GOODS_MOD_MAX_DISCOUNT}% до <span class="date">{GOODS_MOD_MAX_DISCOUNT_EXPIRED_AT | date("d.m.Y")}</span></div>
 		    </div>
 		    {% ENDIF %}
 	      <!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
@@ -476,7 +476,7 @@
   {% IFNOT related_goods_empty %}
   <div class="related__goods">
     <div class="block__title block__nav">
-      <div class="title">Сопутствующие</div>
+      <div class="nav__tabs title">Сопутствующие</div>
       <div class="owl-nav"></div>
     </div>
     <div class="products__grid owl-carousel">
@@ -661,7 +661,7 @@
   {% IFNOT related_views_goods_empty %}
   <div class="related__views">
     <div class="block__title block__nav">
-      <div class="title">Рекомендуем</div>
+      <div class="nav__tabs title">Рекомендуем</div>
       <div class="owl-nav"></div>
     </div>
     <div class="products__grid owl-carousel">
