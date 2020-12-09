@@ -212,7 +212,7 @@
 					<!-- Корзина -->
 					<div class="cart dropdown {% IF CART_COUNT_TOTAL > 0 %}hasItems{% ENDIF %}">
 						<a href="{CART_URL}" class="addto__label dropdown__open cart__icon cart__label" data-open="cart" title="Корзина">
-							<i class="icon-cart2"><span class="path1"></span><span class="path2"></span></i>
+							<i class="icon-cart2"><span class="path1"></span><span class="path2"></span><span class="cart__count" data-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span></i>
 							<div>
 								<div class="cart__title">В корзине</div>
 								<div class="cart__full {CURRENCY_CHAR_CODE}">

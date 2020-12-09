@@ -125,38 +125,26 @@
 				  {% FOR filter_attr_list %}
 				  <div class="filter__item {% FOR values %}{% IF filter_attr_list.values.CHECKED %}checked {% ENDIF %}{% ENDFOR %}">
 					  <div class="filter__name"><span>{filter_attr_list.NAME}</span></div>
-					  <select class="select" name="{% FOR values %}{% IF filter_attr_list.values.CHECKED %}form[filter][attr][{filter_attr_list.ID}][{filter_attr_list.values.ID}]{% ENDIF %}{% ENDFOR %}">
-						  {% FOR values %}
-						  <option value="1" rel="form[filter][attr][{filter_attr_list.ID}][{filter_attr_list.values.ID}]" {% IF filter_attr_list.values.CHECKED %}selected="selected"{% ELSEIF filter_attr_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled"{% ENDIF %}>{filter_attr_list.values.VALUE}</option>
-						  {% ENDFOR %}
-					  </select><!--
-					  <div class="filter__items collapsible__content">
-						  {% FOR values %}
-						  <div class="filter__item {% IF filter_attr_list.values.CHECKED %}checked{% ELSEIF filter_attr_list.values.NB_GOODS_FILTERED=0 %}disabled{% ENDIF %}">
-							  <input type="checkbox" name="form[filter][attr][{filter_attr_list.ID}][{filter_attr_list.values.ID}]" value="1" id="filterAttrVal{filter_attr_list.values.ID}" class="square" {% IF filter_attr_list.values.CHECKED %}checked="checked"{% ELSEIF filter_attr_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled"{% ENDIF %} />
-							  <label for="filterAttrVal{filter_attr_list.values.ID}"><span>{filter_attr_list.values.VALUE}</span></label>
-						  </div>
-						  {% ENDFOR %}
-					  </div>-->
+					  <div class="selectBox">
+						  <select class="select" name="{% FOR values %}{% IF filter_attr_list.values.CHECKED %}form[filter][attr][{filter_attr_list.ID}][{filter_attr_list.values.ID}]{% ENDIF %}{% ENDFOR %}">
+							  {% FOR values %}
+							  <option value="1" rel="form[filter][attr][{filter_attr_list.ID}][{filter_attr_list.values.ID}]" {% IF filter_attr_list.values.CHECKED %}selected="selected"{% ELSEIF filter_attr_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled"{% ENDIF %}>{filter_attr_list.values.VALUE}</option>
+							  {% ENDFOR %}
+						  </select>
+					  </div>
 				  </div>
 				  {% ENDFOR %}
 				  <!-- Фильтры по свойствам товарных модификаций (Например: Цвет, размер, модификация) -->
 				  {% FOR filter_prop_list %}
 				  <div class="filter__item {% FOR values %}{% IF filter_prop_list.values.CHECKED %}checked {% ENDIF %}{% ENDFOR %}">
 					  <div class="filter__name"><span>{filter_prop_list.NAME}</span></div>
-					  <select class="select" name="{% FOR values %}{% IF filter_prop_list.values.CHECKED %}form[filter][prop][{filter_prop_list.ID}][{filter_prop_list.values.ID}]{% ENDIF %}{% ENDFOR %}">
-						  {% FOR values %}
-						  <option value="1" rel="form[filter][prop][{filter_prop_list.ID}][{filter_prop_list.values.ID}]" {% IF filter_prop_list.values.CHECKED %}selected="selected"{% ELSEIF filter_prop_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled"{% ENDIF %}>{filter_prop_list.values.VALUE}</option>
-						  {% ENDFOR %}
-					  </select>
-					  <!--<div class="filter__items collapsible__content">
-						  {% FOR values %}
-						  <div class="filter__item {% IF filter_prop_list.values.CHECKED %}checked{% ELSEIF filter_prop_list.values.NB_GOODS_FILTERED=0 %}disabled{% ENDIF %}">
-							  <input type="checkbox" name="form[filter][prop][{filter_prop_list.ID}][{filter_prop_list.values.ID}]" value="1" id="filterPropVal{filter_prop_list.values.ID}" class="square" {% IF filter_prop_list.values.CHECKED %}checked="checked"{% ELSEIF filter_prop_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled"{% ENDIF %} />
-							  <label for="filterPropVal{filter_prop_list.values.ID}"><span>{filter_prop_list.values.VALUE}</span></label>
-						  </div>
-						  {% ENDFOR %}
-					  </div>-->
+					  <div class="selectBox">
+						  <select class="select" name="{% FOR values %}{% IF filter_prop_list.values.CHECKED %}form[filter][prop][{filter_prop_list.ID}][{filter_prop_list.values.ID}]{% ENDIF %}{% ENDFOR %}">
+							  {% FOR values %}
+							  <option value="1" rel="form[filter][prop][{filter_prop_list.ID}][{filter_prop_list.values.ID}]" {% IF filter_prop_list.values.CHECKED %}selected="selected"{% ELSEIF filter_prop_list.values.NB_GOODS_FILTERED=0 %}disabled="disabled"{% ENDIF %}>{filter_prop_list.values.VALUE}</option>
+							  {% ENDFOR %}
+						  </select>
+					  </div>
 				  </div>
 				  {% ENDFOR %}
 				  <div class="filter__list filters__buttons">
