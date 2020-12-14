@@ -454,7 +454,8 @@ section {margin: 2rem 0;position: relative;}
 /*** Страница: Список акций ***/
 .promotion__campaign {margin: -2rem -0.5rem 0 -0.5rem;}
 .promotion__image {padding: 3rem 1rem;background-image: url("{ASSETS_IMAGES_PATH}sale.jpg");background-size: cover;background-repeat: no-repeat;display: flex;flex-wrap: wrap;align-items: center;justify-content: center;flex-direction: column;}
-.promotion__item {border: 1px dashed #fda800;border-radius: 5px;}
+.promotion__item {border: 1px dashed transparent;border-radius: 5px;}
+.promotion__item:hover {border-color: #fda800;}
 .promotion__item .promotion__percentage {font-size: 60px;font-weight: bold;}
 .promotion__item .button {margin-top: 2rem;}
 .promotion__item .promotion__date {margin: 2rem 0;text-align: center;}
@@ -943,7 +944,7 @@ header .catalog__icon {padding: 0;width: 50px;height: 50px;line-height: 48px;tex
 @media all and (max-width: 991px) {
 .cart {width: 90px;}
 .cart__icon i + div {display: none;}
-.cart__icon i .cart__count {top: -6px;right: -12px;width: 24px;height: 24px;line-height: 24px;font-size: 12px;color: #FFFFFF;text-align: center;border-radius: 100%;background-color: #fda800;display: block;position: absolute;}
+.cart__icon i .cart__count {top: -6px;right: -12px;width: 24px;height: 24px;line-height: 24px;font-size: 12px;color: #FFFFFF;text-align: center;border-radius: 100%;background-color: #fda800;display: block;position: absolute;font-family: 'Jost', sans-serif;}
 }
 @media all and (max-width: 767px) {
 .cart {width: 80px}
@@ -953,6 +954,7 @@ header .catalog__icon {padding: 0;width: 50px;height: 50px;line-height: 48px;tex
 .cart {width: 50px;height: 50px;border-radius: 5px;}
 .cart__icon {padding: 0;justify-content: center;}
 .cart__icon i {font-size: 24px;}
+.cart__icon i .cart__count {top: -12px;right: -12px;}
 }
 
 /** Поиск **/
@@ -1224,7 +1226,7 @@ header .separator {margin: 0 2rem;}
 #catalog .sub[data-level="1"]::-webkit-scrollbar-thumb {border-radius: 0.5rem;background-color: #fda800;}
 #catalog .sub[data-level="1"]::-webkit-scrollbar-track {border-radius: 0.5rem;background-color: #dddddd;}
 @media all and (max-width: 480px) {
-#catalog .catalog__link[data-level="0"] > .catalog__name {width: 100%;}
+#catalog .catalog__link[data-level="0"] > .catalog__name {width: 100%;font-size: 1.25rem;}
 #catalog .catalog__link[data-level="0"] > .catalog__image {display: none;}
 #catalog .sub[data-level="1"] {position: relative;top: auto;left: auto;margin-bottom: 1rem;width: 98%;}
 }
@@ -1437,7 +1439,7 @@ footer #subscribe {margin-top: 0;}
 .categories__image {width: 100px;}
 .categories__image img {max-width: 100px;}
 .categories__content {width: calc(100% - 100px);padding: 0 0 0 1rem;}
-.categories__name {margin-bottom: 1rem;}
+.categories__name {margin-bottom: 1rem;font-size: 1.25rem;}
 .categories__desc {height: 90px;}
 }
 
@@ -1457,11 +1459,13 @@ footer #subscribe {margin-top: 0;}
 }
 
 /** Фильтры **/
-.form__filters {margin-top: 1rem;display: flex;align-items: flex-end;flex-wrap: wrap;}
+#filters {margin-top: 1rem;position: relative;}
+.form__filters {display: flex;align-items: flex-end;flex-wrap: wrap;}
 .filter__item {margin: 0.5rem 1rem;}
-.filters-price {width: 100%;padding: 0 1rem;}
+.filters-price {width: 100%;padding: 0 1rem 1rem 1rem;}
 .filters__buttons {margin: 0.5rem 1rem;}
 .filters__buttons .button {line-height: 50px;}
+.filters__icon {display: none;}
 /* Фильтр Цены */
 .filters-price .filter__items {max-height: 100%;overflow: visible;margin-top: 0;}
 .filters-price .inputText {display: inline-block;height: 30px;line-height: 30px;text-align: center;color: #000000;padding: 0 3px;border: 0;background: transparent;}
@@ -1480,6 +1484,16 @@ footer #subscribe {margin-top: 0;}
 .filters__buttons {display: none;}
 .hasFilters .filters__buttons {display: block;}
 .goodsFilterPriceRangePointers {flex-grow: 1;padding-left: 3rem;}
+@media all and (max-width: 991px) {
+.filters__icon {margin-bottom: 1rem;padding: 1rem;background-color: #FFFFFF;border: 1px solid #dddddd;border-radius: 5px;width: 100%;font-size: 1rem;font-weight: 500;cursor: pointer;position: relative;display: flex;align-items: center;}
+.filters__icon:after {content: '\e912';font-family: 'icomoon';position: absolute;right: 1rem;line-height: 1;display: flex;align-items: center;justify-content: center;transition: all 0.3s ease;pointer-events: none;box-sizing: border-box;}
+.filters__icon:hover:after {color: #fda800;}
+#filters.opened {z-index: 11;}
+#filters.opened .filters__icon {border-color: #fda800;}
+#filters.opened .filters__icon:after {color: #fda800;}
+#filters .row {display: none;}
+#filters.opened .row {display: block;}
+}
 @media all and (max-width: 480px) {
 .filter__item {width: 100%;}
 }

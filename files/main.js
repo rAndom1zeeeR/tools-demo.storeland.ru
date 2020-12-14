@@ -764,13 +764,13 @@ function catalogpage() {
     }
   });
 
-  $('.filters__icon').click(function(event){
+  $('.filters__icon').on('click',function(event){
     event.preventDefault();
-    if ($(this).parent().parent().hasClass('opened')) {
-      $(this).parent().parent().removeClass('opened');
+    if ($(this).parent().hasClass('opened')) {
+      $(this).parent().removeClass('opened');
       $('#overlay').removeClass('opened');
     } else {
-      $(this).parent().parent().addClass('opened');
+      $(this).parent().addClass('opened');
       $('#overlay').addClass('opened');
     }
   });
@@ -2717,7 +2717,7 @@ function coupons() {
         let deliveryPrice = parseInt($('.cartSumDelivery .num').text());
         let newTotalSum = totalSum + deliveryPrice;
         let cartSum = $('.cartSumTotal').data('value');
-        if (totalSum > cartSum) {
+        if (totalSum >= cartSum) {
           couponInput.parent().addClass('error');
           couponInput.parent().removeClass('active');
           couponInput.val("").attr("placeholder", "Купон неверен");
@@ -2735,17 +2735,6 @@ function coupons() {
           $('.cartSumTotalHide .num').text(newTotalSum);
           $('.cartSumDiscount .num').text(totalSum);
         }
-
-        /*console.log('oldQuickPrice', oldQuickPrice)
-        console.log('discountBlock', discountBlock)
-        console.log('discountName', discountName)
-        console.log('discountPercent', discountPercent)
-        console.log('totalBlock', totalBlock)
-        console.log('totalSum', totalSum)
-        console.log('deliveryPrice', deliveryPrice)
-        console.log('newTotalSum', newTotalSum)
-        console.log('cartSum', cartSum)*/
-
       },
       error: function(data){
         console.log("Возникла ошибка: Невозможно отправить форму купона.");

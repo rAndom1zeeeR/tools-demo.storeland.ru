@@ -3,7 +3,7 @@
 {% ELSE %}
 <!-- Список акций -->
 <div class="products__container">
-  <div class="products__grid">
+  <div class="products__grid promotion__campaign">
   {% FOR promotion_campaign %}
   <div class="promotion__item product__item {% IFNOT promotion_campaign.IS_WORK %}empty{% ENDIF %}">
     <div class="promotion__image">
