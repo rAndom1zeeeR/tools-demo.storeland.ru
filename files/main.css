@@ -319,7 +319,7 @@ section {margin: 2rem 0;position: relative;}
 #breadcrumbs {width: 50%;display: block;position: relative;overflow-x: auto;}
 #breadcrumbs ul {margin: 0;padding: 0;list-style: none;display: flex;flex-wrap: nowrap;align-items: center;/*justify-content: flex-end;*/}
 #breadcrumbs ul li {display: flex;align-items: center;line-height: 2rem;font-size: 1rem;}
-#breadcrumbs ul li:before {content: ">";font-family: 'icomoon';font-size: 10px;display: block;margin: 0 1.5rem;}
+#breadcrumbs ul li:before {content: "\e93c";font-family: 'icomoon';font-size: 10px;display: block;margin: 0 1.5rem;}
 #breadcrumbs ul li:first-child:before {display: none;}
 #breadcrumbs ul li span {text-overflow: ellipsis;white-space: nowrap;overflow: hidden;max-width: 300px;}
 #breadcrumbs ul li:last-child {color: #fda800;font-size: 18px;}
@@ -1705,6 +1705,7 @@ productView__description .htmlDataBlock {font-size: 18px;}
 .productViewQuick .productView__more a {white-space: normal;line-height: 1.5;padding: 1rem;}
 }
 @media all and (max-width: 480px) {
+.productViewBlock.fancybox-content {padding: 2rem;}
 .fancybox-content .productView__price .price__old {display: block;margin: 1rem 0 0 0;width: 100%;}
 .fancybox-content .productView__articles + .productView__available {width: 100%;margin: 1rem 0 0 0;}
 }
