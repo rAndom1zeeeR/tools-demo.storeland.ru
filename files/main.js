@@ -768,9 +768,11 @@ function catalogpage() {
     event.preventDefault();
     if ($(this).parent().hasClass('opened')) {
       $(this).parent().removeClass('opened');
+      $('#filters').removeClass('opened');
       $('#overlay').removeClass('opened');
     } else {
       $(this).parent().addClass('opened');
+      $('#filters').addClass('opened');
       $('#overlay').addClass('opened');
     }
   });

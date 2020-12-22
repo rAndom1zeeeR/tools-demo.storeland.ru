@@ -910,7 +910,7 @@
 					{% IF index_page %}
 					<!-- Слайдшоу -->
 					<div class="inner">
-						<div id="slideshow">
+						<div id="slideshow" {% IF index_page_sale_goods_empty %}class="full"{% ENDIF %}>
 							<!-- Слайдер -->
 							<div class="slider owl-carousel">
 								<div class="slider__item lozad" data-background-image="{ASSETS_IMAGES_PATH}slide1.png?design=marketplace" data-slide="1">
