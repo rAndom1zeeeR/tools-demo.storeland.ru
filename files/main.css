@@ -603,6 +603,7 @@ section {margin: 2rem 0;position: relative;}
 .fastOrderForm .form__fields:last-child {margin-bottom: 0;}
 .fastOrderForm input[type="checkbox"], .fastOrderForm input[type="radio"] {height: 1.5rem;border-radius: 5px;padding: 0;}
 .fastOrderForm input, .fastOrderForm select {height: 60px;}
+.fastOrderForm .deliveryConvenientDate {flex-wrap: wrap;}
 .fastOrderForm .deliveryConvenientDate label {display: block;}
 .fastOrderForm .deliveryConvenientDate:nth-child(1) {width: calc(50% - 0.5rem);margin-right: 0.5rem;}
 .fastOrderForm .deliveryConvenientDate:nth-child(2) {width: calc(50% - 0.5rem);margin-left: 0.5rem;}
@@ -1551,7 +1552,7 @@ productView__description .htmlDataBlock {font-size: 18px;}
 /* Модификации */
 .goodsModificationsBlock {display: flex;flex-wrap: wrap;margin: 0 -0.5rem 0.5rem -0.5rem;}
 .goodsModificationsBlock select {border-color: #FFFFFF;}
-.goodsModificationsProperty label {display: block;margin-bottom: 0.25rem;}
+.goodsModificationsProperty label {display: block;margin-bottom: 0.25rem;font-size: 1rem;}
 .goodsModificationsProperty {margin: 0 0.5rem 1rem 0.5rem;flex-grow: 1;}
 .goodsModDescription {width: 100%;margin-bottom: 0.5rem;padding: 0 10px;overflow: hidden;word-break: break-word;}
 /* Товар: Нет в наличии */
