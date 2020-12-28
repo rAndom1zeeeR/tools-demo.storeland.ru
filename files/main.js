@@ -3019,7 +3019,7 @@ function slideShow() {
   owlS.owlCarousel({
     items: 1,
     loop: true,
-    rewind: true,
+    rewind: false,
     lazyLoad: false,
     nav: true,
     navText: [ , ],
@@ -3035,9 +3035,7 @@ function slideShow() {
     dotsSpeed: 400,
     mouseDrag: true,
     touchDrag: true,
-    pullDrag: true,
-    animateOut: 'slideOutLeft',
-    animateIn: 'slideInRight'
+    pullDrag: true
   });
 }
 // Новости

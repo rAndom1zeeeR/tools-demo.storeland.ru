@@ -178,8 +178,13 @@
 						    <img class="goods-image-medium lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=marketplace" data-src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=marketplace{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" itemprop="image">
 					    </a>
 					    <div class="product__ico">
-						    {% IF goods.MIN_PRICE_OLD>goods.MIN_PRICE_NOW %}<span class="ico__sales"></span>{% ENDIF %}
-						    {% IF goods.IS_PLACE_ON_INDEX_PAGE %}<span class="ico__sale"></span>{% ENDIF %}
+						    {% IF goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>goods.MIN_PRICE_NOW %}
+						    <span class="ico__sales"></span>
+						    <span class="ico__sale"></span>
+						    {% ELSEIF goods.MIN_PRICE_OLD>goods.MIN_PRICE_NOW %}
+						    <span class="ico__sales"></span>
+						    <span class="ico__sale"></span>
+						    {% ENDIF %}
 						    {% IF goods.IS_TOP %}<span class="ico__best"></span>{% ENDIF %}
 						    {% IF goods.IS_NEW %}<span class="ico__new"></span>{% ENDIF %}
 					    </div>
@@ -298,12 +303,12 @@
 					    <div class="ratings">
 						    {% IF goods.OPINION_RATING_VALUE %}
 						    <span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-						                <meta itemprop="worstRating" content = "1">
-						                <meta itemprop="bestRating" content = "10">
-						                <meta itemprop="ratingValue" content = "{goods.OPINION_RATING_VALUE}">
-						                <meta itemprop="reviewCount" content = "{goods.OPINION_RATING_CNT_ALL}">
-						                <div class="rating" style="width:{goods.OPINION_RATING_VALUE}0%" alt="{goods.OPINION_RATING_VALUE}" title="Рейтинг товара"></div>
-						              </span>
+	                <meta itemprop="worstRating" content = "1">
+	                <meta itemprop="bestRating" content = "10">
+	                <meta itemprop="ratingValue" content = "{goods.OPINION_RATING_VALUE}">
+	                <meta itemprop="reviewCount" content = "{goods.OPINION_RATING_CNT_ALL}">
+	                <div class="rating" style="width:{goods.OPINION_RATING_VALUE}0%" alt="{goods.OPINION_RATING_VALUE}" title="Рейтинг товара"></div>
+	              </span>
 						    {% ELSE %}
 						    <div class="rating" style="width:0%" alt="Рейтинг не определён" title="Рейтинг не определён"></div>
 						    {% ENDIF %}
@@ -355,9 +360,14 @@
 				    <a href="{goods.URL_MIN_PRICE_NOW | url_amp}" class="product__img" title="{goods.NAME}" itemprop="url">
 					    <img class="goods-image-medium lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=marketplace" data-src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=marketplace{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" itemprop="image">
 				    </a>
-				    <div class="product__ico" style="display: none;">
-					    {% IF goods.MIN_PRICE_OLD>goods.MIN_PRICE_NOW %}<span class="ico__sales"></span>{% ENDIF %}
-					    {% IF goods.IS_PLACE_ON_INDEX_PAGE %}<span class="ico__sale"></span>{% ENDIF %}
+				    <div class="product__ico">
+					    {% IF goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>goods.MIN_PRICE_NOW %}
+					    <span class="ico__sales"></span>
+					    <span class="ico__sale"></span>
+					    {% ELSEIF goods.MIN_PRICE_OLD>goods.MIN_PRICE_NOW %}
+					    <span class="ico__sales"></span>
+					    <span class="ico__sale"></span>
+					    {% ENDIF %}
 					    {% IF goods.IS_TOP %}<span class="ico__best"></span>{% ENDIF %}
 					    {% IF goods.IS_NEW %}<span class="ico__new"></span>{% ENDIF %}
 				    </div>
