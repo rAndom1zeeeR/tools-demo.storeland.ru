@@ -784,8 +784,6 @@ header .welcome {display: none;}
 header .logo {width: 300px;}
 .logo .title {margin-left: 1rem;font-size: 3rem;font-weight: bold;display: inline-block;vertical-align: middle;}
 @media all and (max-width: 480px) {
-header .logo {width: 60px;}
-header .logo .title {display: none;}
 }
 
 /** Меню **/
@@ -859,7 +857,7 @@ header .logo .title {display: none;}
 .contacts__block {font-size: 18px;font-weight: bold;display: flex;flex-wrap: wrap;align-items: center;}
 .contacts__icon {width: 40px;margin-right: 1.5rem;}
 .contacts__icon i {font-size: 40px;}
-.contacts__icon + .contacts__content {width: calc(100% - 64px);}
+.contacts__icon + .contacts__content {width: calc(100% - 64px);white-space: nowrap}
 .contacts__block .fancybox__link {margin-top: 0.25rem;line-height: 1;font-weight: normal;}
 .contacts__block .fancybox__link span {border-bottom: 1px solid #000000;}
 .contacts__block:hover .fancybox__link {color: #0086b7;cursor: pointer;}
@@ -876,7 +874,8 @@ header .logo .title {display: none;}
 }
 @media all and (max-width: 480px) {
 .contacts__block + .contacts__block {display: none;}
-.header__contacts {width: auto;margin: 0 0 0 1.5rem;justify-content: flex-end;}
+.header__contacts {margin-top: 1rem;}
+/*.header__contacts {width: auto;margin: 0 0 0 1.5rem;justify-content: flex-end;}*/
 }
 
 /** Каталог **/
