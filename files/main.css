@@ -1191,6 +1191,7 @@ header .separator {margin: 0 2rem;}
 @media all and (max-width: 480px) {
 .product__image .product__img {height:{SETTINGS_GOODS_IMAGES_SIZE_MEDIUM | divide("3")}px;}
 }
+
 /*** Товары списком ***/
 .products__list .product__item {margin: 0;padding: 1rem;border-radius: 5px;border-width: 1px;border-style: dashed;border-color: transparent transparent #dddddd transparent;}
 .products__list .product__item:hover {border-color: #fda800;}
