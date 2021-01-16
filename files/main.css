@@ -1673,7 +1673,7 @@ footer #subscribe {margin-top: 0;}
 /*** Модальные окна ***/
 #fancybox__callback {max-width: 400px}
 #fancybox__feedback {max-width: 400px}
-.fancybox__callback {max-width: 900px}
+.fancybox-content {max-width: 900px}
 .modal__content .form__fields {justify-content: space-between;}
 .modal__content .form__fields .form__field {width: 100%;}
 .modal__content .form__field + .form__field {margin-top: 2rem;}
