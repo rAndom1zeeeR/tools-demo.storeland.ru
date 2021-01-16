@@ -1549,7 +1549,7 @@ footer #subscribe {margin-top: 0;}
 .productView__notify .add-notify:after {margin-left: 1rem;font-size: 30px;}
 .productView__form {background-color: #ffefcf;border-radius: 5px;padding: 2rem;}
 .productView__qty.qty a {border: 0;}
-productView__description .htmlDataBlock {font-size: 18px;}
+.productView__description .htmlDataBlock {font-size: 18px;}
 /* Модификации */
 .goodsModificationsBlock {display: flex;flex-wrap: wrap;margin: 0 -0.5rem 0.5rem -0.5rem;}
 .goodsModificationsBlock select {border-color: #FFFFFF;}
@@ -1673,6 +1673,7 @@ productView__description .htmlDataBlock {font-size: 18px;}
 /*** Модальные окна ***/
 #fancybox__callback {max-width: 400px}
 #fancybox__feedback {max-width: 400px}
+.fancybox__callback {max-width: 900px}
 .modal__content .form__fields {justify-content: space-between;}
 .modal__content .form__fields .form__field {width: 100%;}
 .modal__content .form__field + .form__field {margin-top: 2rem;}
