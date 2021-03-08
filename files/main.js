@@ -2499,7 +2499,7 @@ function OrderScriptsSelect() {
     });
     $('.order__paymentSelect option:first-child').prop('selected', true);
     // Вывод описания доставки
-    let DeliveryDescription = $('.delivery__radio:checked').next('.delivery__desc').html();
+    let DeliveryDescription = $('.delivery__radio:checked').parent().find('.delivery__desc').html()
     $('.delivery__description').html(DeliveryDescription);
     if (DeliveryDescription == undefined ) {
       $('.delivery__description').css("display", "none");
