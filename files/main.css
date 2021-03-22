@@ -1358,7 +1358,7 @@ footer .catalog__items a {font-size: 18px;margin: 0 0 1rem 0;display: block;}
 .footer__contacts .contacts__icon .icon-newspaper span:not(.path6):not(.path7):before {color: #FFFFFF;}
 .footer__contacts .contacts__block .fancybox__link span {border-color: #FFFFFF;}
 .footer__contacts .contacts__block:hover .fancybox__link span {border-color: #0086b7;}
-.footer__contacts .contacts__block.subscribe .contacts__content span {font-weight: normal;max-width: 120px;display: block;}
+.footer__contacts .contacts__block.subscribe .contacts__content span {font-weight: normal;max-width: 120px;display: block;white-space: normal;}
 /** Подвал. Подписаться **/
 footer #subscribe {width: 45%;}
 footer .form__field {position: relative;display: flex;align-items: center;}
