@@ -638,11 +638,9 @@ function goodspage() {
     if($(this).hasClass('active')){
       $(this).removeClass('active').find('span').text("Все отзывы");
       opinionContent.find('.opinion__item').removeClass('show');
-      $('html, body').animate({scrollTop : opinionContent.offset().top }, 800);
     }else{
       $(this).addClass('active').find('span').text("Скрыть все");
       opinionContent.find('.opinion__item').addClass('show');
-      $('html, body').animate({scrollTop : opinionContent.offset().top + $(window).height()}, 800);
     }
   });
   // Переключение для Положительный и Отрицательный отзыв
