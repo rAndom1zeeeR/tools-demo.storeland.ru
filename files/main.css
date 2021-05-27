@@ -858,6 +858,7 @@ header .logo {width: 300px;}
 .contacts__icon {width: 40px;margin-right: 1.5rem;}
 .contacts__icon i {font-size: 40px;}
 .contacts__icon + .contacts__content {width: calc(100% - 64px);white-space: nowrap}
+.contacts__icon + .contacts__content > span {white-space: nowrap;text-overflow: ellipsis;overflow: hidden;display: block;}
 .contacts__block .fancybox__link {margin-top: 0.25rem;line-height: 1;font-weight: normal;}
 .contacts__block .fancybox__link span {border-bottom: 1px solid #000000;}
 .contacts__block:hover .fancybox__link {color: #0086b7;cursor: pointer;}
