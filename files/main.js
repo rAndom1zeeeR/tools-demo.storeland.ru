@@ -1782,7 +1782,8 @@ function removeFromCompareAll(e){
 function removeFromCart(e){
   event.preventDefault();
   if(confirm('Вы точно хотите удалить товар из корзины?')){
-  e.parent().parent().fadeOut().remove();
+  e.parent().parent().parent().fadeOut().remove();
+  let dataId = e.data('id');
   let href = e.attr('href');
   let qty = e.data('qty');
   let oldCount = $('.cart__count').attr('data-count');
@@ -1790,9 +1791,12 @@ function removeFromCart(e){
     cache  : false,
     url		 : href,
     success: function(d){
+      $('.productId[value='+ dataId +']').each(function(){
+        $(this).parent().find('.add-cart').removeClass('added');
+      });
       let newCount = oldCount - qty;
       $('.cart__count').attr('data-count', newCount).text(newCount);
-      $('.totalSum').html($(d).find('.totalSum').html());
+      $('.cartSum').html($(d).find('.cartSum').html());
       let flag = 0;
       if(newCount != 0){
         $('.addto__cart .addto__item').each(function(){

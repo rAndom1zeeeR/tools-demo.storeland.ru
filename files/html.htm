@@ -217,7 +217,7 @@
 								<div class="cart__full {CURRENCY_CHAR_CODE}">
 									<span class="cart__count" data-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
 									<span class="cart__measure">товар{CART_COUNT_TOTAL| gen_word_end("","а","ов")} на </span>
-									<span class="cart__totalSum totalSum  price__now">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
+									<span class="cart__totalSum price__now cartSum">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
 								</div>
 								<div class="cart__empty">Пусто</div>
 							</div>
@@ -245,7 +245,7 @@
 							</div>
 							<div class="addto__total {CURRENCY_CHAR_CODE}">
 								<span>Итого:</span>
-								<span class="price__now">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
+								<span class="price__now cartSum">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
 							</div>
 							{% ENDIF %}
 							<div class="addto__empty">
